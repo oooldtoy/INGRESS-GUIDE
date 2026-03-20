@@ -1,0 +1,12 @@
+:root {
+  --sl-color-accent-low: #e8fbe9;
+  --sl-color-accent: #25a244;
+  --sl-color-accent-high: #0f7a2e;
+
+  --sl-color-text-accent: #0f7a2e;
+  --sl-color-link: #1f9d3a;
+  --sl-color-link-hover: #0f7a2e;
+
+  --sl-color-bg-nav: #f4fff6;
+  --sl-color-bg-sidebar: #f7fff8;
+}

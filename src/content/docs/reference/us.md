@@ -1,0 +1,4 @@
+---
+title: Ultra Strike
+description: 名词介绍
+---

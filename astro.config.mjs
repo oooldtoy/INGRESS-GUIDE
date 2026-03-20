@@ -9,10 +9,13 @@ export default defineConfig({
 	integrations: [
 		starlight({
 			title: 'INGRESS指南',
+			customCss: ['./src/theme.css'],
+			pagination: false,
 			sidebar: [
 				{ label: '游戏操作', autogenerate: { directory: 'guides' } },
 				{ label: '游戏数据', autogenerate: { directory: 'data' } },
-				{ label: '游戏玩法', autogenerate: { directory: 'play' } },
+				{ label: '游戏玩法', autogenerate: { directory: 'gameplay' } },
+				{ label: '名词解释', autogenerate: { directory: 'reference' } },
 			],
 		}),
 	],
