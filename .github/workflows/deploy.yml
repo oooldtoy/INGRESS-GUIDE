@@ -9,15 +9,22 @@ permissions:
   pages: write
   id-token: write
 
+# 添加此环境变量，消除 Node 20 弃用警告
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Install, build, and upload with Hugo
+      
+      # 重点修改这里：添加 node-version 参数
+      - name: Install, build, and upload with Astro
         uses: withastro/action@v3
-        # 如果你使用 pnpm 或 yarn，请查看官方文档，npm 无需额外配置
+        with:
+          node-version: 22  # 强制使用 Node 22 以满足 Astro 6.0 的要求
 
   deploy:
     needs: build
