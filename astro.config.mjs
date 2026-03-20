@@ -9,12 +9,10 @@ export default defineConfig({
 	integrations: [
 		starlight({
 			title: 'INGRESS指南',
-			social: [
-				{ icon: 'github', label: 'GitHub', href: 'https://github.com/MarsianCreator/INGRESS-GUIDE' },
-			],
 			sidebar: [
-				{ label: '开始使用', link: '/introduction/' },
-				{ label: '进阶教程', autogenerate: { directory: 'guides' } },
+				{ label: '游戏操作', autogenerate: { directory: 'guides' } },
+				{ label: '游戏数据', autogenerate: { directory: 'data' } },
+				{ label: '游戏玩法', autogenerate: { directory: 'play' } },
 			],
 		}),
 	],
