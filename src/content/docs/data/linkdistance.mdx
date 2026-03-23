@@ -1,0 +1,21 @@
+---
+title: 可连接距离
+---
+
+在[连线](/INGRESS-GUIDE/guides/link/)时，出射Portal的可连接距离与Portal上所有Resonator的平均等级以及部署于其上的[Link Amp](/INGRESS-GUIDE/reference/linkamp/)的种类及数量有关。
+
+计算公式为：
+
+<div style={{ textAlign: 'center', fontFamily: '"Cambria Math", "Times New Roman", serif', fontSize: '1.25rem', margin: '2rem 0' }}>
+  <i>L</i> = 160 &times; (<i>Average level</i>)<sup>4</sup> &times; <i>Amplifier</i>
+</div>
+
+L即为可连接的最大距离（单位为米），Average level（平均等级）不同于Portal显示等级，是8个Resonator等级的算数平均值，Amplifier（增幅倍率）详见[Link Amp](INGRESS-GUIDE/reference/linkamp/)。
+
+常见的Link可连接距离如下：
+* 单人若不部署Mod，可连接的最大距离为160.18 km。
+* 单人通过部署两个[SoftBank Ultralink](/INGRESS-GUIDE/reference/linkamp/#softbank-ultralink)可连接的最大距离为1001.13 km。
+* 双人通过部署四个[SoftBank Ultralink](/INGRESS-GUIDE/reference/linkamp/#softbank-ultralink)可连接的最大距离为2491.13 km。
+* 通过部署四个[Very Rare Link Amp](/INGRESS-GUIDE/reference/linkamp/#very-rare-link-amp)可连接的最大距离为6881.28 km。
+
+如有需要，可以通过[这个网站](https://notnianticlabs.com/link-distance-calculator/)来方便地计算所有情况下的可连接距离。

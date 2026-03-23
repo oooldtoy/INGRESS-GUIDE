@@ -1,0 +1,24 @@
+---
+title: Mod增益衰减效应
+---
+
+在Portal上部署Mod时，由于每个Portal共可部署四个Mod，且不存在同类Mod的部署限制。因此同类Mod部署时，其增益效果会出现衰减效应。
+不同Mod表现出的衰减效应不遵循普适公式，各类有不同的计算方式。
+
+### 连接距离
+
+不同Link Amp的连接距离[增幅倍率](/INGRESS-GUIDE/reference/linkamp/)为大于1的整数，叠加后增益效果计算公式如下：
+
+<div style={{ textAlign: 'center', fontFamily: '"Cambria Math", "Times New Roman", serif', fontSize: '1.25rem', margin: '2rem 0' }}>
+  <i>Amplifier</i> = <i>A<sub>1</sub></i> + 0.25<i>A<sub>2</sub></i> + 0.125<i>A<sub>3</sub></i> + 0.125<i>A<sub>4</sub></i> 
+</div>
+
+其中A<sub>1</sub>至A<sub>4</sub>为该Portal上部署的（如有）四个Link Amp Mod的增幅倍率，且A<sub>1</sub>>A<sub>2</sub>>A<sub>3</sub>>A<sub>4</sub>。
+
+### Hack间隔
+
+
+
+### Hack烧毁
+
+### 出射上限

@@ -1,0 +1,32 @@
+---
+title: Link/连线
+description: Link的介绍
+sidebar:
+  order: 4
+---
+import { Image } from 'astro:assets';
+import LinkPic from '../../../assets/ingress.png';
+
+Link是游戏中将不同Portal连接起来的操作。被连接起来的Portal有潜力进一步构成[控制场](/INGRESS-GUIDE/reference/controlfield/)，且会为所有被连接的Portal附加[防御值](/INGRESS-GUIDE/reference/migitation/)。
+
+### Link建立
+建立Link需要满足以下数个条件：
+1. 出射Portal及入射Portal均需拥有8个Resonator。
+2. 两者之间的距离需小于或等于出射Portal的[最大可连接距离](/INGRESS-GUIDE/data/linkdistance/)
+3. 需要拥有入射Portal的[Key](/INGRESS-GUIDE/reference/key/)
+4. 将要建立的Link不能与已有Link相交。
+5. 如果出射Portal位于[Control Field](/INGRESS-GUIDE/reference/controlfield/)下，最大Link距离不能超过2公里*。如果出射Portal位于Control Field的顶点，则不受该限制。
+6. 出射Portal的出射连接数量不大于[最大外连数量](/INGRESS-GUIDE/data/outlinkcap/)。
+
+*这是一项2024年作出的[改动](https://ingress.com/news/2024-matryoshkalink2km)，并有可能在未来产生调整。
+
+在满足上述条件的情况下，可以在下述界面点击Link按钮进行连线。
+
+{/*图片调整位置并居中的办法*/}
+<div style={{ display: 'flex', justifyContent: 'center' }}>
+  <Image src={LinkPic} width={400} alt="描述" />
+</div>
+
+### Link破坏
+
+当连线两端的任一Portal上部署的Resonator降低至**2个**时，连线会被切断，与连线相关的控制场会被破坏，被附加在Portal上的防御值也会消失。
