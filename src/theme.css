@@ -10,3 +10,16 @@
   --sl-color-bg-nav: #f4fff6;
   --sl-color-bg-sidebar: #f7fff8;
 }
+
+[data-theme='dark'] {
+  --sl-color-accent-low: #0a2e14;
+  --sl-color-accent: #25a244;
+  --sl-color-accent-high: #5dde80;
+
+  --sl-color-text-accent: #5dde80;
+  --sl-color-link: #4ade80;
+  --sl-color-link-hover: #86efac;
+
+  --sl-color-bg-nav: #0d1f10;
+  --sl-color-bg-sidebar: #0f2214;
+}

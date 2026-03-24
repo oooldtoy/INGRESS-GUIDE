@@ -1,11 +1,51 @@
 ---
 title: Portal/能量塔
+sidebar:
+    order: 1
 ---
+import { Image } from 'astro:assets';
+import whiteportal from '../../../assets/whiteportal.png';
+import greenportal from '../../../assets/greenportal1.png';
+import blueportal from '../../../assets/blueportal1.png';
+import redportal from '../../../assets/redportal.png';
 
 Portal是游戏中的唯一可互动对象。
 
 ### Portal的种类
 
+<div class="not-content" style={{ display: 'flex', justifyContent: 'center', gap: '20px', alignItems: 'center' }}>
+  <Image
+    src={greenportal}
+    width={254}
+    height={200}
+    style={{ objectFit: 'cover', width: '254px', height: '200px', display: 'block' }}
+    alt=""
+  />
+  <Image
+    src={whiteportal}
+    width={254}
+    height={200}
+    style={{ objectFit: 'cover', width: '254px', height: '200px', display: 'block' }}
+    alt=""
+  />
+</div>
+
+<div class="not-content" style={{ display: 'flex', justifyContent: 'center', gap: '20px', alignItems: 'center' }}>
+  <Image
+    src={redportal}
+    width={254}
+    height={200}
+    style={{ objectFit: 'cover', width: '254px', height: '200px', display: 'block' }}
+    alt=""
+  />
+  <Image
+    src={blueportal}
+    width={254}
+    height={200}
+    style={{ objectFit: 'cover', width: '254px', height: '200px', display: 'block' }}
+    alt=""
+  />
+</div>
 
 ### Portal的交互
 
