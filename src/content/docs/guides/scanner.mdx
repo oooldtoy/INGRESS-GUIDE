@@ -1,0 +1,88 @@
+---
+title: 游戏界面
+description: 游戏界面的简要介绍
+sidebar:
+  order: 1
+---
+import { Image } from 'astro:assets';
+import scanner from '../../../assets/scanner1.png';
+
+进入游戏后，你的游戏界面应该如下图所示：
+
+<div style="display: flex; justify-content: center; width: 100%;">
+<Image src={scanner} width={300} alt="" />
+</div>
+
+你会发现你处于一张现实地图（目前数据来源为OpenStreetMap）上，其上存在可互动实体[Portal](/INGRESS-GUIDE/reference/portal/)（1），你的位置（2）以及其余功能和信息区。
+
+### （1）Portal
+当一个Portal位于你的[可互动范围](/INGRESS-GUIDE/guides/scanner/#3%E5%8F%AF%E4%BA%92%E5%8A%A8%E8%8C%83%E5%9B%B4)内时，你可以通过点击Portal进入详情页并进行进一步操作。
+
+有关Portal的操作，详情参见[Portal](/INGRESS-GUIDE/reference/portal/#portal%E7%9A%84%E4%BA%A4%E4%BA%92)。
+
+### （2）玩家位置
+玩家位置会显示在屏幕下部中心，该位置标志你的真实地理位置。若你所在区域无法获得精确卫星定位位置，Scanner可能会被禁用，阻止你与一切实体互动。
+
+标志玩家位置的图标可以在Profile中修改，部分图标需要付费。
+
+### （3）可互动范围
+玩家可以与存在于以自身实际位置为圆心，**半径40米**的圆内的Portal进行完整互动，黄圈即标明该互动范围的边界。
+
+对于进入可互动范围的Portal，玩家可以对其进行[Hack](/INGRESS-GUIDE/guides/hack/)、[部署](INGRESS-GUIDE/guides/deploy/)、[连线]((INGRESS-GUIDE/guides/link/))等操作。
+
+### （4）控制中心
+控制中心涵盖了游戏内的大部分功能性选项。
+
+详情参见[控制中心](/INGRESS-GUIDE/guides/controlcenter/)。
+
+
+### （5）Inventory/背包
+可以在背包里管理你的道具库存。
+
+目前的背包物品携带数量上限为2000，可通过购买CORE订阅会员提升至2500，或进一步购买CARGO订阅提升至3000。所有的仓位提升仅在订阅期内生效。
+
+### （6）游戏记录及聊天
+游戏中大部分与Portal的交互会留下记录（log），你可以在这个点击进入页面后对log进行查看；游戏同样拥有聊天功能，可以在CHAT标签页进行阵营内或跨阵营聊天。
+
+详情参见[游戏记录及聊天](/INGRESS-GUIDE/reference/comm/)。
+
+### （7）活动及每日任务
+可以在这个页面内确认、完成你的每日任务，或确认活动任务内容和完成情况。
+
+详情参见[活动及每日任务](/INGRESS-GUIDE/gameplay/dispatch/)
+
+### （8）图层
+该悬浮页可以控制如何在地图上呈现各Portal状态。你可以方便地修改是否高亮显示已造访过的Portal(UPV)或已占领过的Portal(UPC)，甚至在地图上观察各Portal上的[无人机](/INGRESS-GUIDE/guides/dronenet/)停靠情况。
+
+详情参见[图层](/INGRESS-GUIDE/reference/layer/)。
+
+### （9）无人机视角
+无人机允许你以较低的频率远程Hack Portal以获取物资。
+
+有关无人机的具体操作，参见[无人机](/INGRESS-GUIDE/guides/dronenet/)。
+
+### （10）指南针
+主页上的小型指南针可以指示你的方向。
+
+通过轻点指南针，可以在两种朝向模式中切换：
+* 面向向前：你面向的方位会随时随屏幕旋转为游戏正前方。
+* 自主控制：屏幕将不再旋转，你可以通过双指旋转来修改游戏方向。
+
+### （11）XM补充
+点击按钮后会显示出[Power Cube](/INGRESS-GUIDE/reference/powercube/)快速使用栏，可以快捷补充[XM](/INGRESS-GUIDE/reference/xm/)。
+
+### （12）XM槽
+XM槽为游戏的“能量”槽。可轻点显示目前剩余的XM数量。
+
+当XM耗尽，Scanner将被禁用，你将无法与Portal进行互动。可以通过使用[Power Cube](/INGRESS-GUIDE/reference/powercube/)来快速回复XM槽。
+
+### （13）经验槽
+Access Point(AP)，即用于升级的经验值，各项操作均能够为你积累经验，具体行为带来的经验值请参考[经验值](/INGRESS-GUIDE/data/accesspoint/)。
+
+可轻点确认当前经验值与升级所需经验值。
+
+### （14）个人页面
+可于个人页面确认你的成就完成情况、勋章、任务、游戏数据等内容。
+
+### （15）最近游戏记录
+该部分会显示最近发生的游戏记录，点击即可进入[游戏记录及聊天](/INGRESS-GUIDE/reference/comm/)页面。
