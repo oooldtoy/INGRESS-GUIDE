@@ -1,0 +1,58 @@
+---
+title: Deploy/部署
+sidebar:
+  order: 3
+---
+import { Image } from 'astro:assets';
+import { Aside } from '@astrojs/starlight/components';
+import portalinfo from '../../../assets/portalinfo.png';
+import north from '../../../assets/north.png';
+
+在进入Portal的[可互动范围](/INGRESS-GUIDE/guides/scanner/#3%E5%8F%AF%E4%BA%92%E5%8A%A8%E8%8C%83%E5%9B%B4)后，你即可对该Portal进行部署。
+
+### Resonator的部署
+
+点击进入Portal详情页后，你的游戏界面应如图所示：
+
+<div style="display: flex; justify-content: center; width: 100%;">
+<Image src={portalinfo} width={300} alt="" />
+</div>
+
+你可以通过点击Portal插槽或左下角的部署按钮进行Resonator的部署。在部署时，你将只能使用等于或低于你目前等级的道具，且高级Resonator在部署时有个数限制：
+<div style="display: flex; justify-content: center; width: 100%;">
+
+| Resonator等级  | 最大个数 |
+| ---- | ---- |
+| L1 | 8 |
+| L2 | 4 |
+| L3 | 4 |
+| L4 | 4 |
+| L5 | 2 |
+| L6 | 2 |
+| L7 | 1 |
+| L8 | 1 |
+
+</div>
+
+被部署的Resonator会出现在地图中，其位置受两个因素影响：
+
+<p>
+  1. 方向。Resonator会以正北为标准，每45度可部署一个。Portal详情页中一个插槽上会有一个指南针符号 <Image src={north} alt="north" style={{ height: '1.2em', width: 'auto', verticalAlign: 'middle', display: 'inline-block', margin: '0 4px' }} />，代表其位于正北方向。
+  2. 距离。在部署时你与Portal正中心的距离，即为Resonator被部署后与Portal正中心的距离。
+</p>
+
+Portal等级受Portal上被部署的Resonator的平均等级影响，详见 [Portal等级](/INGRESS-GUIDE/reference/portal/#portal%E7%9A%84%E7%AD%89%E7%BA%A7)。
+
+如果Portal上已无空余插槽，你可以通过点击一个插槽对该插槽上的Resonator进行**升级**，前提是你将部署的Resonator等级高于目前Resonator等级，且你在该Portal上部署的Resonator未超过个数限制。
+
+### Mod的部署
+
+你可以通过在左下角的部署按钮上滑或点按右上角的Mod位（四个框）来进行Mod部署。
+
+一个玩家一次最多可以在一个Portal上部署两个Mod，有时你可能会发现一个Portal上存在相同玩家部署的两个以上的Mod，这通常是因为他们使用了翻转阵营的道具，例如[毒](/INGRESS-GUIDE/reference/filpcard/)或者[VRBB](/INGRESS-GUIDE/reference/vrbb/)。
+
+<Aside type="tip">
+Mod一旦部署上就无法被轻易拆除，在部署Mod前请三思。
+
+</Aside>
+各Mod的功能请参见[Mod](/INGRESS-GUIDE/reference/mods/)。
