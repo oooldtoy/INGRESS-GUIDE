@@ -1,7 +1,125 @@
 ---
 title: Farm mod/生产模组
 ---
-
 import { Image } from 'astro:assets';
-import PicOne from '../../../assets/ingress.png';
+import { Aside } from '@astrojs/starlight/components';
+import chs from '../../../assets/chs.png';
+import rhs from '../../../assets/rhs.png';
+import vrhs from '../../../assets/vrhs.png';
+import cmh from '../../../assets/cmh.png';
+import rmh from '../../../assets/rmh.png';
+import vrmh from '../../../assets/vrmh.png';
+import itom from '../../../assets/ito-.png';
+import itop from '../../../assets/ito+.png';
 
+Farm mod 是一类影响 Hack 冷却时间、烧毁次数以及物资产出的模组，主要分为 Heatsink、Multihack 以及 ITO EN Transmuter 三类。
+
+同一个 Portal 上可以部署多个同类生产 Mod，但增益效果随叠加个数[显著衰减](/INGRESS-GUIDE/data/diminishingrule/)。
+
+### Heatsink
+
+Heatsink（HS）用于缩短 Portal 的 Hack 冷却时间。Portal 默认冷却时间为：友军Portal 180秒，敌军Portal 300秒。
+
+<div class="not-content" style={{ display: 'flex',flexWrap: 'wrap', justifyContent: 'center', gap: '20px', alignItems: 'center' }}>
+  <Image
+    src={chs}
+    width={200}
+    style={{ objectFit: 'cover', width: '200px', display: 'block' }}
+    alt=""
+  />
+  <Image
+    src={rhs}
+    width={200}
+    style={{ objectFit: 'cover', width: '200px', display: 'block' }}
+    alt=""
+  />
+  <Image
+    src={vrhs}
+    width={200}
+    style={{ objectFit: 'cover', width: '200px', display: 'block' }}
+    alt=""
+  />
+</div>
+<div style="display: flex; justify-content: center; width: 100%;">
+| 稀有度 | 缩写 | 冷却减少 | 冷却后实际等待时间 |
+| :--- | :--- | :--- | :--- |
+| Common | CHS | **-20%** | 144/240 秒 |
+| Rare | RHS | **-50%** | 90/150 秒 |
+| Very Rare | VRHS | **-70%** | 54/90 秒 |
+</div>
+
+**重置冷却**：Heatsink 有一个独特机制——**部署 Heatsink 的玩家，其在该 Portal 上的冷却计时器会立即归零**，可以马上进行一次 Hack，同时该玩家(仅限部署HS的玩家)的烧毁计数也随之重置。在短时间内需要多次Hack的情况下，部署HS是最优先的选择。
+
+多个 Heatsink 叠加时，冷却减少倍率遵循[衰减规则](/INGRESS-GUIDE/data/diminishingrule/#hack间隔)。四个 VRHS 叠加，Portal 冷却可压缩至约 **7 秒**。
+
+### Multihack
+
+Multihack（MH）用于增加 Portal 在烧毁前可 Hack 的总次数。Portal 默认每 **4 小时**内最多可被 Hack **4 次**，超过即进入烧毁状态，在4小时窗口结束前无法继续Hack。
+<div class="not-content" style={{ display: 'flex',flexWrap: 'wrap', justifyContent: 'center', gap: '20px', alignItems: 'center' }}>
+  <Image
+    src={cmh}
+    width={200}
+    style={{ objectFit: 'cover', width: '200px', display: 'block' }}
+    alt=""
+  />
+  <Image
+    src={rmh}
+    width={200}
+    style={{ objectFit: 'cover', width: '200px', display: 'block' }}
+    alt=""
+  />
+  <Image
+    src={vrmh}
+    width={200}
+    style={{ objectFit: 'cover', width: '200px', display: 'block' }}
+    alt=""
+  />
+</div>
+<div style="display: flex; justify-content: center; width: 100%;">
+| 稀有度 | 缩写 | 额外 Hack 次数 | 单个 Mod 叠加后总次数 |
+| :--- | :--- | :--- | :--- |
+| Common | CMH | **+4** | 8 次 |
+| Rare | RMH | **+8** | 12 次 |
+| Very Rare | VRMH | **+12** | 16 次 |
+</div>
+MH虽然无法重置冷却状态，但是仍然可以通过增加额外Hack次数让已经烧毁的Portal继续被Hack。例如，如果你在Portal烧毁后向Portal上安装了一个CMH，这时待冷却时间结束，你可以继续Hack这个Portal 4次直到触及增加后的烧毁上限。
+
+多个 MH 叠加时，额外次数的增益同样遵循[衰减规则](/INGRESS-GUIDE/data/diminishingrule/#hack烧毁)。
+
+<Aside>
+**Farm 搭配建议**：Heatsink 和 Multihack 通常组合部署。常见的高效 Farm 配置为 **2×VRMH + 1×VRHS + 任意Mod**，在最大化可 Hack 次数的同时大幅缩短每次 Hack 的等待时间。
+</Aside>
+
+### ITO EN Transmuter
+
+ITO EN Transmuter 是一类改变 Portal Hack **产出物资种类倾向**的 Mod，分为 **Transmuter+** 和 **Transmuter-** 两种，不影响冷却时间或烧毁次数。
+<div class="not-content" style={{ display: 'flex',flexWrap: 'wrap', justifyContent: 'center', gap: '20px', alignItems: 'center' }}>
+  <Image
+    src={itom}
+    width={250}
+    style={{ objectFit: 'cover', width: '250px', display: 'block' }}
+    alt=""
+  />
+  <Image
+    src={itop}
+    width={250}
+    style={{ objectFit: 'cover', width: '250px', display: 'block' }}
+    alt=""
+  />
+</div>
+
+<div style="display: flex; justify-content: center; width: 100%;">
+| 类型 | 缩写 | 效果 |
+| :--- | :--- | :--- |
+| **ITO EN Transmuter +** | ITO+ | 产出偏向**防御性物资**（Resonator、Shield 等） |
+| **ITO EN Transmuter -** | ITO- | 产出偏向**进攻性物资**（XMP Burster、Ultrastrike 等） |
+</div>
+两个ITO EN道具均为NIAS与伊藤园合作开发，可以将Portal Hack的产出物资变换种类。
+
+就具体效果而言，目前已知：
+
+ITO EN +：将所有的XMP Buster和Ultra Strike转换为Resonator和Shield。
+
+ITO EN -：将所有的Resonator和Shield转换为XMP Buster和Ultra Strike。
+
+PowerCube不受两者影响，[Aegis Shield](INGRESS-GUIDE/reference/shield/#aegis%E6%8A%A4%E7%9B%BE)不受ITO EN -影响，其余Mod基本不受影响。
