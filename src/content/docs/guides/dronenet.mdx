@@ -1,3 +1,45 @@
 ---
 title: Dronenet/无人机
+sidebar:
+  order: 7
 ---
+import { Image } from 'astro:assets';
+import { Aside } from '@astrojs/starlight/components';
+import drone from '../../../assets/drone.png';
+
+Dronenet（无人机网络）是 2020 年 6 月 5 日加入游戏的功能，允许玩家通过远程操控无人机对远距离的 Portal 进行 Hack。你可以在[控制中心](/INGRESS-GUIDE/guides/controlcenter/)找到无人机的入口。
+
+<div style={{ display: 'flex', justifyContent: 'center' }}>
+  <Image src={drone} width={300} alt="无人机界面" />
+</div>
+
+### 无人机的移动规则
+
+每位玩家拥有**一架**无人机。无人机首次部署时从玩家当前所在位置出发，此后可以逐步跳转至远处的 Portal。
+
+移动时需遵循以下规则：
+
+- 目标 Portal 必须处于无人机当前位置的**视野范围**内。
+- 无人机在一个 Portal 上至少停留 **60 分钟**后，才可以移动至下一个 Portal。
+- 同一个 Portal 上最多可同时停留 **8 架**无人机（来自不同玩家）。
+- 可以随时通过"召回"功能将无人机返回至当前所在位置，召回不受 60 分钟限制。
+
+<Aside type="caution">
+当无人机所在的 Portal 被敌方**中立化或翻转阵营**时，无人机将被强制召回至玩家身上。
+</Aside>
+
+### 无人机的 Hack 规则
+
+无人机每次部署于一个 Portal 时，可对该 Portal 进行**一次** Hack（标准 Hack 或 [Glyph Hack](/INGRESS-GUIDE/gameplay/glyph-hack/)）。离开并再次停留后可再次 Hack。
+
+与普通 Hack 相比，无人机 Hack 有以下限制：
+
+- **无法**获取 [Portal Key](/INGRESS-GUIDE/reference/key/)。
+- **无法**完成任务或参与活动签到。
+- 无人机 Hack 与普通 Hack **共享**烧毁（Burnout）状态：若某 Portal 已被普通 Hack 烧毁，无人机 Hack 同样会失败。
+- 不计入**独特 Portal 到访**统计（因为你并未亲身前往）。
+
+无人机 Hack 与普通 Hack 相同的方面：
+
+- 产出物资的逻辑与普通 Hack 相同。
+- 计入 Sojourner 勋章的连续 Hack 记录。

@@ -1,0 +1,63 @@
+---
+title: Passcode/兑换码
+sidebar:
+  order: 9
+---
+
+import { Image } from 'astro:assets';
+import { Aside } from '@astrojs/starlight/components';
+import passcodeios from '../../../assets/passcodeios.png';
+import passcodeandroid from '../../../assets/passcodeandroid.png';
+
+Passcode 是游戏官方发放奖励、物资或特殊奖牌（Badge）的一种方式。成功兑换一个 Passcode 后，你通常会获得 [AP](/INGRESS-GUIDE/data/accesspoint/)、[XM](/INGRESS-GUIDE/reference/xm/)、各类道具（如 [Resonator](/INGRESS-GUIDE/reference/resonator/)、[Burster](/INGRESS-GUIDE/reference/xmp/)、盾等），部分特殊的 Passcode 还会直接解锁个人资料页的专属奖牌。
+
+### Passcode 的获取与解码
+
+Passcode 的来源十分广泛，通常包括以下几种：
+
+- **官方社交媒体与活动**：在官方频道或 First Saturday (IFS)、NL1331 等线下/线上活动中直接发放。
+- **实体周边附赠**：购买官方的物资实体卡、人物奖牌实体卡（如 Bio Card）时，背面刮开或印有的代码。
+- **剧情解谜（Decoding）**：Ingress 的背景故事（Lore）经常伴随着隐藏在图片、文本或视频中的密文，玩家社区中的“解谜者”（Decoder）通过密码学知识将其破译后，最终得出的明文即为可使用的 Passcode。
+
+<Aside>
+大多数通过解谜或活动发放的免费 Passcode 都有**兑换次数限制**（"Fully Redeemed" 即已被兑换完毕），或者有时间限制（过期失效）。而购买实体卡获得的 Passcode 通常为单次专属，只有拥有者可以兑换一次。
+</Aside>
+
+### 兑换过热（Circuitry Too Hot）
+
+为了防止恶意穷举，当你**短时间内**连续输入多次无效的 Passcode，或者快速连续兑换了大量有效的 Passcode，系统会提示 `Circuitry too hot`（线路过热）。
+
+触发过热后，你需要等待一段时间（通常为 30 到 60 分钟不等）才能再次尝试兑换。
+
+### Passcode 的兑换方式
+
+由于平台政策的差异，Android 和 iOS 设备的兑换方式有所不同。
+
+#### Android 客户端内兑换
+
+如果你使用的是 Android 设备，可以直接在游戏内（Scanner）进行兑换：
+1. 点击屏幕中央底部的进入[控制中心](/INGRESS-GUIDE/guides/controlcenter/)。
+2. 进入**Store（商店）**页面。
+3. 滑动到页面最底部，你会看到一个文本框。
+4. 在文本框中输入你的 Passcode 并点击 **Redeem（兑换）**。
+
+<div style={{ display: 'flex', justifyContent: 'center' }}>
+  <Image src={passcodeandroid} width={300} alt="Android 兑换界面" />
+</div>
+
+#### iOS 及网页端兑换
+
+受限于 Apple 的 App Store 政策，iOS 端的 Scanner 内移除了直接输入 Passcode 的文本框。iOS 用户（以及不想在手机上操作的 Android 用户）需要通过 Ingress 的官方 Intel 地图进行网页端兑换：
+
+1. 访问网页版 **[Ingress Intel Map](https://intel.ingress.com/)**。
+2. 使用你登录游戏的同一个账号登录。
+3. 点击页面右上角的 **Passcode** 锁形图标。
+4. 在弹出的文本框中输入 Passcode 并点击 **Submit（提交）**。
+
+<div style={{ display: 'flex', justifyContent: 'center' }}>
+  <Image src={passcodeios} width={300} alt="iOS 兑换界面" />
+</div>
+
+<Aside type="tip">
+如果兑换时提示 `Inventory Full`（物品栏已满），你依然会获得 AP 和 XM 奖励，但**无法获得** Passcode 包含的道具。请在兑换前确保你的背包有足够的空位。
+</Aside>

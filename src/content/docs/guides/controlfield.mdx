@@ -3,3 +3,40 @@ title: Control Field/控制场
 sidebar:
     order: 6
 ---
+import { Aside } from '@astrojs/starlight/components';
+
+Control Field（CF）是游戏内操作的最终目标。当三个属于同一阵营的 Portal 两两之间均建立了 [Link](/INGRESS-GUIDE/guides/link/) 后，三角形覆盖的区域将形成一个 Control Field，并根据覆盖区域内的人口估算值给予建立者 Mind Unit 分数。
+
+### Control Field 的建立
+
+当你在两个已经与第三个 Portal 相互连接的 Portal 之间建立第三条 Link 时，Control Field 会自动生成。完成后可获得相应的 [AP](/INGRESS-GUIDE/data/accesspoint/) 奖励。
+
+### Mind Unit (MU)
+
+Mind Unit（MU）是衡量 Control Field 覆盖范围内人口数量的得分单位，也是阵营竞争的核心指标。
+
+MU 数量由 Control Field 所覆盖区域内的**估算人口**决定，并非精确的实际人口数据。一般而言，MU 值约等于覆盖区域内估算人口的三分之二。覆盖面积越大、区域人口密度越高，所获得的 MU 越多。由于是估算值，在覆盖水域等无人区时也可能产生一定数量的 MU。
+
+#### MU 的得分规则
+
+MU 得分以"检查点"（Checkpoint）为单位进行结算：
+
+- **检查点**：每 **5 小时**结算一次，统计当前存活的所有己方 Control Field 的 MU 总和，计入阵营得分。
+- **赛季（Septicycle）**：每 **175 小时**（35 个检查点）构成一个赛季。赛季结束时，累计 MU 更多的阵营获胜。
+
+<Aside>
+MU 得分是即时快照，不会累积。只有在某个检查点时 Control Field 仍然存活，该 Field 的 MU 才会被计入当次得分。在两次检查点之间建立并被摧毁的 Control Field 不会贡献地区分数，但依然计入个人的 MU 捕获统计。
+</Aside>
+
+关于通过层叠 Control Field 来提升 MU 得分的策略，详见[多重控制场](/INGRESS-GUIDE/gameplay/multifield/)。
+
+### Control Field 的效果
+
+Control Field 处于活跃状态时，会对处于其内部的 Portal 产生限制：
+
+- **连线距离限制**：当出射 Portal 位于 Control Field **内部**（非顶点）时，其可向外连线的最大距离被限制为 **2 公里**。位于 Control Field **顶点**的 Portal 不受此限制。详见 [Link](/INGRESS-GUIDE/guides/link/)。
+- **不可穿越**：新建立的 Link 不能与已有 Link 或已有 Control Field 的边相交，因此 Control Field 内部的 Portal 通常难以向外远距离连线。
+
+### Control Field 的破坏
+
+当 Control Field 三个顶点中的**任意一个** Portal 上部署的 Resonator 数量降至 2 个以下时，以该 Portal 为端点的所有 Link 均会断裂，对应的 Control Field 也随之消失。
