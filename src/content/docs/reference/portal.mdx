@@ -4,51 +4,108 @@ sidebar:
     order: 1
 ---
 import { Image } from 'astro:assets';
+import { Aside } from '@astrojs/starlight/components';
 import whiteportal from '../../../assets/whiteportal.png';
 import greenportal from '../../../assets/greenportal1.png';
 import blueportal from '../../../assets/blueportal1.png';
 import redportal from '../../../assets/redportal.png';
+import portalinfo from '../../../assets/portalinfo.png';
 
-Portal是游戏中的唯一可互动对象。
+Portal（能量塔）是 Ingress 中的核心元素，也是玩家唯一的可互动对象。通常它们代表现实世界中的地标建筑、雕塑、纪念碑等。
 
 ### Portal的种类
 
-<div class="not-content" style={{ display: 'flex',flexWrap: 'wrap', justifyContent: 'center', gap: '20px', alignItems: 'center' }}>
-  <Image
-    src={greenportal}
-    width={254}
-    height={200}
-    style={{ objectFit: 'cover', width: '254px', height: '200px', display: 'block' }}
-    alt=""
-  />
-  <Image
-    src={whiteportal}
-    width={254}
-    height={200}
-    style={{ objectFit: 'cover', width: '254px', height: '200px', display: 'block' }}
-    alt=""
-  />
-</div>
+根据当前的占领状态，Portal 在 Scanner 中会显示为不同的颜色：
 
 <div class="not-content" style={{ display: 'flex',flexWrap: 'wrap', justifyContent: 'center', gap: '20px', alignItems: 'center' }}>
-  <Image
-    src={redportal}
-    width={254}
-    height={200}
-    style={{ objectFit: 'cover', width: '254px', height: '200px', display: 'block' }}
-    alt=""
-  />
-  <Image
-    src={blueportal}
-    width={254}
-    height={200}
-    style={{ objectFit: 'cover', width: '254px', height: '200px', display: 'block' }}
-    alt=""
-  />
+  <div style={{ textAlign: 'center' }}>
+    <Image
+      src={whiteportal}
+      width={254}
+      height={200}
+      loading="eager"
+      style={{ objectFit: 'cover', width: '254px', height: '200px', display: 'block' }}
+      alt="中立 Portal"
+    />
+    <p style={{ marginTop: '8px', fontSize: '0.9em' }}><b>中立 (Neutral)</b><br/>无主状态，任何人都可以部署共振器占领</p>
+  </div>
+  <div style={{ textAlign: 'center' }}>
+    <Image
+      src={greenportal}
+      width={254}
+      height={200}
+      loading="eager"
+      style={{ objectFit: 'cover', width: '254px', height: '200px', display: 'block' }}
+      alt="启蒙军 Portal"
+    />
+    <p style={{ marginTop: '8px', fontSize: '0.9em' }}><b>启蒙军 (Enlightened)</b><br/>被启蒙军占领的Portal</p>
+  </div>
+</div>
+
+<div class="not-content" style={{ display: 'flex',flexWrap: 'wrap', justifyContent: 'center', gap: '20px', alignItems: 'center', marginTop: '20px' }}>
+  <div style={{ textAlign: 'center' }}>
+    <Image
+      src={blueportal}
+      width={254}
+      height={200}
+      loading="eager"
+      style={{ objectFit: 'cover', width: '254px', height: '200px', display: 'block' }}
+      alt="反抗军 Portal"
+    />
+    <p style={{ marginTop: '8px', fontSize: '0.9em' }}><b>反抗军 (Resistance)</b><br/>被反抗军占领的Portal</p>
+  </div>
+  <div style={{ textAlign: 'center' }}>
+    <Image
+      src={redportal}
+      width={254}
+      height={200}
+      loading="eager"
+      style={{ objectFit: 'cover', width: '254px', height: '200px', display: 'block' }}
+      alt="Machina Portal"
+    />
+    <p style={{ marginTop: '8px', fontSize: '0.9em' }}><b>Machina（机械军）</b><br/>被红色阵营占领的Portal</p>
+  </div>
 </div>
 
 ### Portal的交互
 
+在进入 Portal 的可互动范围（40米圈内）后，你可以与 Portal 进行多种交互操作。点击 Portal 即可打开详细信息面板：
+
+<div style={{ display: 'flex', justifyContent: 'center', margin: '20px 0' }}>
+  <Image src={portalinfo} width={400} alt="Portal 详情界面" />
+</div>
+
+常见的基本交互操作包括（详情请点击对应链接查阅）：
+- **[Hack/入侵](/INGRESS-GUIDE/guides/hack/)**：获取道具和物资（按住可进行 Glyph Hack 获得额外奖励）。
+- **[Deploy/部署](/INGRESS-GUIDE/guides/deploy/)**：为 Portal 放置或升级 [Resonator（共振器）](/INGRESS-GUIDE/reference/resonator/) 和 [Mod（模组）](/INGRESS-GUIDE/reference/mods/)。
+- **[Recharge/充能](/INGRESS-GUIDE/guides/recharge/)**：消耗自身的 [XM](/INGRESS-GUIDE/reference/xm/) 为 Portal 补充能量，维持其占领状态。
+- **[Link/建立连接](/INGRESS-GUIDE/guides/link/)**：从一个插满 8 个 Resonator 的 Portal 发起连接至另一座 Portal，以建立 [Control Field](/INGRESS-GUIDE/guides/controlfield/)。
+
 ### Portal的等级
 
+一个 Portal 的等级决定了你能从中 Hack 出什么等级的物品。Portal 的等级计算方式完全由其槽位上部署的 [Resonator](/INGRESS-GUIDE/reference/resonator/) 的**平均等级**决定。
+
+**计算公式：**
+> **Portal 等级 = 8个槽位上所有 Resonator 等级之和 ÷ 8 （向下取整）**
+
+如果 Portal 上没有插满 8 个 Resonator，缺失的槽位记为 0 级进行计算。
+
+**举例说明：**
+- 部署了 8 个 L1 Resonator：(1×8) / 8 = L1 Portal
+- 部署了 4 个 L2 和 4 个 L1：(2×4 + 1×4) / 8 = 1.5 → **向下取整为 L1 Portal**
+- 部署了 4 个 L3 和 4 个 L4：(3×4 + 4×4) / 8 = 3.5 → **向下取整为 L3 Portal**
+- 部署了 1 个 L8，1 个 L7，2 个 L6，2 个 L5 和 2 个 L4（一个玩家单人能部署的最高配置）：(8+7+6×2+5×2+4×2) / 8 = 45 / 8 = 5.625 → **向下取整为 L5 Portal**
+
+因为高级 Resonator 的单人部署数量有限制（见[部署](/INGRESS-GUIDE/guides/deploy/)），所以想要建立 L7 或 L8 的高级 Portal，**必须由多名同阵营玩家合作完成**（比如8名8级+的玩家各部署 1 个 L8 Resonator 才能造出 L8 Portal，这种行为通常称为起8）。
+
 ### Portal的来源
+
+游戏中的 Portal 并不是随机生成的，绝大部分都是由全球的 Ingress 特工在现实中实地考察并提交申请的。
+
+当玩家的[等级](/INGRESS-GUIDE/data/level/)达到 **L8** 时，即可解锁申请新 Portal 的权限；而当等级达到 **L16** 时，可以访问 **Open Portal Recon（OPR）** 系统，参与全球 Portal 申请的审核工作。
+
+<Aside type= "caution">
+2026年3月12日，NIAS[通知](https://ingress.com/news/pausing-opr-retiring-overclock)，Portal申请与审核均自当日暂停，恢复时间未知。
+</Aside>
+
+只有符合 NIAS 官方指引（具有探索价值、锻炼价值或社交属性），且远离危险区域（如马路中央）、中小学或私人住宅的现实地点，才有可能通过审核并最终成为地图上的一座 Portal。

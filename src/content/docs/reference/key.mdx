@@ -2,3 +2,50 @@
 title: Key/能量塔钥匙
 ---
 
+import { Aside } from '@astrojs/starlight/components';
+
+Key（能量塔钥匙）是 Ingress 中非常核心的一种道具。它是建立连线和远程维护能量塔不可或缺的必需品。
+
+每一把 Key 都有其对应的唯一 [Portal](/INGRESS-GUIDE/reference/portal/)。在Inventory中，Key 拥有独立的分类页面以便玩家进行管理。
+
+### Key 的获取
+
+Key 主要是作为 [Hack](/INGRESS-GUIDE/guides/hack/) Portal 时的特殊产物掉落。获取 Key 的具体机制如下：
+
+##### 1. 常规 Hack 的掉落判定
+在进行普通的点击 Hack 时，Key 的掉落遵循以下逻辑：
+- 如果你的Inventory中目前**没有**该 Portal 的 Key：Hack 时有概率掉落一把 Key。
+- 如果你的Inventory中**已有**该 Portal 的 Key（在[Capsule](/INGRESS-GUIDE/reference/capsule/)或Key Locker中不被认定为存在于Inventory里）：**默认情况下不会掉落新的 Key**。
+
+##### 2. 快捷操作的掉落判定
+为了绕过上述“包里有 Key 就不掉”的限制，玩家可以在 Hack 时显式地向系统请求 Key：
+- **操作方法**：如 [Hack 指南](/INGRESS-GUIDE/guides/hack/#便捷hack需要key) 所述，在地图界面长按 Portal 后向左上角滑动，或者进入详情页长按 Hack 按钮后向右上角滑动（有Bug，不推荐使用）。
+- **效果**：无论你背包里是否已经有这把钥匙，都有概率再掉落一把。
+
+##### 3. Glyph Hack 的高级指令
+在进入 [Glyph Hack](/INGRESS-GUIDE/gameplay/glyph-hack/) 之前的准备阶段（即屏幕显示 "Command Channel Open" 时），你可以画出特定的隐藏指令来影响 Key 的产出：
+
+| 指令图案 | 含义 | 效果 |
+| :---: | :--- | :--- |
+| **MORE** | 更多 Key | 相当于要求获取 Key。不仅无视包里的现有存量，并且在正确完成 Glyph 后，**有概率一次性掉落 2 把甚至更多的 Key**，最多不超过3把。有概率不掉落Key。 |
+| **LESS** | 更少 Key | 相当于拒绝 Key，本次 Glyph Hack 绝对不产出 Key。 |
+| **SPEED** | 只要 Key | 本次Hack除Key以外不产出其他任何物品。有极低概率不掉落Key。 |
+<Aside type="tip">
+**技巧**：如果你在路过一个关键 Portal 时急需多把钥匙，强烈建议使用 **SPEED** 指令进行 Glyph Hack。如果 Portal 装配了高级的 Heat Sink 和 Multi-Hack，你可以反复使用该指令进行 Hack，迅速囤积十几把乃至更多钥匙。
+</Aside>
+
+### Key 的使用
+
+获得 Key 后，它主要用于以下两项核心操作：
+
+##### 1. 建立连线 (Link)
+当你要建立[Link](/INGRESS-GUIDE/guides/link/)时，你必须拥有目标（入射端）Portal 的 Key。
+- 发起连线的瞬间，这把目标 Portal 的 **Key 会被消耗**。
+- 建立多重或针包时，通常需要提前囤积中心塔的大量钥匙。
+- 详情请参阅 [Link](/INGRESS-GUIDE/guides/link/)。
+
+##### 2. 远程充能 (Recharge)
+作为防守方，你不需要站在 Portal 旁边也能为其充电，前提是你要有它的 Key。
+- 只要钥匙在你的物品栏中（或拿在手上），点击该钥匙即可进入充能界面。
+- 远程充能**不会消耗 Key**，你可以永久保留它用于日常维护。
+- 充能效率会随着你与 Portal 之间距离的增加而衰减，具体可充能的最远距离由你的特工等级决定。详情参阅 [Recharge](/INGRESS-GUIDE/guides/recharge/)。

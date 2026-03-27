@@ -1,0 +1,54 @@
+---
+title: Medal/徽章
+---
+
+import { Image } from 'astro:assets';
+import medal from '../../../assets/medal.JPEG';
+
+在个人页面中，徽章（Medal）可以展示你的主要游戏成就，也用作提升[等级](/INGRESS-GUIDE/data/level/)的条件。
+
+自Ingress 3.6.1 版本更新以来，为了更好地展示特工的成就，个人页面（Agent Profile）的徽章部分被重新分类整理。目前，徽章共分为 **七大类别**。
+
+一张常见的特工个人资料页徽章展示区域如图所示：
+
+<div style={{ display: 'flex', justifyContent: 'center', margin: '20px 0' }}>
+  <Image src={medal} width={400} loading="eager" alt="Ingress 个人页面徽章分类展示" />
+</div>
+
+
+### 1. Anomaly Seasons XM异常赛季徽章
+这一栏主要展示 Ingress 官方举办的[XM异常（XMA）](/INGRESS-GUIDE/gameplay/xmanomaly/)**赛季**徽章。自2025年起，传统全球大型活动XM异常的奖章奖励规则多次变化，并引入了赛季徽章。
+
+获取赛季奖章并不必须前往线下参加XM Anomaly大战，一般奖章会分为三个档位，对应三条赛季积分线；而赛季积分通常可以通过[活动任务](/INGRESS-GUIDE/gameplay/dispatch/)、每日任务（Bounty）或参加IFS等方式获取。
+
+### 2. XM Anomalies XM异常大战徽章
+与“赛季”相辅相成，这一分类记录的是你在历次XM异常大战中的参与情况。
+
+一般而言，获取异常事件大战徽章需要亲身参与XMA大战，即线下前往开展XMA大战的城市参与活动。
+
+在`+ Alpha`赛季前，规则通常允许通过远程对战区Portal[充能](/INGRESS-GUIDE/guides/recharge/)来获得大战徽章，但在后续的赛季（至今），充能已无法再获取XM大战徽章。
+
+### 3. Collectibles 可收藏徽章
+这类徽章主要是游戏订阅奖牌、游戏剧情人物牌、官方赞助商联名牌或是通过购买官方周边获得的收藏牌，如 NL-1331（官方活动车）、各类剧情人物头像牌（如 ADA, PAC, Jahan 等）。图片中第三排含有汽车图标或人物头像的徽章即属于此类。
+
+该栏内大部分徽章可以通过购买获得，早期被称为“人头牌”的人物徽章通常需要在XMA线下购买，现在则早已转为游戏商店购买。
+
+### 4. Global Ops 全球行动徽章
+Global Ops 记录了玩家在官方发起的全球性限时挑战活动中的表现。目前全球行动多为XMA赛季的附属活动，曾经Global Ops常作为独立活动存在。
+
+Global Ops通常要求玩家在限定时间内完成一些游戏数据的积累，例如Link长度、造访新的Portal等，新的规则应关注游戏动态。
+
+### 5. Achievements 成就徽章
+这是 Ingress 中**最核心、最基础**的一类徽章。它们记录了你日常游戏数据的累计，也是**玩家升至 9 级以上所必须依赖的徽章**。
+
+包含如 Explorer（访问独特 Portal）、Trekker（步行距离）、Builder（部署共振器数量）、Hacker（骇入次数）、Illuminator（建立控制场覆盖MU）、Recharger（充能数量）等。图片中第五、六排展示的那些经典圆形或多边形徽章（按铜、银、金、铂金、黑牌排列）即属于此类。
+
+所有成就徽章无需取得，默认上锁，在数据需求达成后即解锁最低等级（铜牌）。
+
+### 6. Anniversaries 周年纪念徽章
+代表了你作为 Ingress 特工的“资历”。这里陈列了玩家自活动以来历年的周年纪念牌（如 Innovator, Vanguard, Luminary, Sage 等）。
+
+在每年 Ingress 的周年庆（通常在 11 月份）期间，只要你的特工账号达到了一定的等级并且活跃（有AP增加，不同年份规则可能微调），系统就会自动发放一枚周年徽章。玩家当时的等级越高，获得的周年徽章阶级（铜/银/金/铂金/黑）就越高。
+
+### 7. Limited Editions 限量版徽章
+这一栏包含了无法归类到上述类别的各种特殊徽章，比如参加Goruck、Epiphany Dawn等特殊活动，或为社群做出了特殊贡献等赠予的徽章。

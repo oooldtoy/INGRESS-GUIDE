@@ -17,9 +17,111 @@ title: Mod增益衰减效应
 
 ### Hack间隔
 
+Hack间隔时间随Heatsink的部署而降低；游戏文本显示为“Hack速度提高X%”，实际效果为“Hack冷却时间降低至默认时间的（1-X%）倍”。
+
+在多个Heatsink叠加时，Portal的冷却时间变化遵循如下公式：
+<div style={{ 
+  display: 'flex', 
+  flexWrap: 'wrap', 
+  justifyContent: 'center', 
+  alignItems: 'center', 
+  gap: '12px 4px', 
+  fontFamily: '"Cambria Math", "Times New Roman", serif', 
+  fontSize: '1.25rem', 
+  margin: '2rem 0' 
+}}>
+  
+  <span style={{ display: 'inline-flex', alignItems: 'center' }}>
+    <i>t<sub>c</sub></i> &nbsp;=&nbsp; <i>t<sub>ic</sub></i>
+  </span>
+
+  <span style={{ display: 'inline-flex', alignItems: 'center' }}>
+    &times;(1-<i>X<sub>1</sub>%</i>)
+  </span>
+
+  <span style={{ display: 'inline-flex', alignItems: 'center' }}>
+    &times;(1-
+    <span style={{ display: 'inline-flex', flexDirection: 'column', textAlign: 'center', fontSize: '0.8em', lineHeight: '1.2', margin: '0 4px' }}>
+      <span style={{ borderBottom: '1px solid', padding: '0 2px' }}><i>X<sub>2</sub>%</i></span>
+      <span>2</span>
+    </span>
+    )
+  </span>
+  <span style={{ display: 'inline-flex', alignItems: 'center' }}>
+    &times;(1-
+    <span style={{ display: 'inline-flex', flexDirection: 'column', textAlign: 'center', fontSize: '0.8em', lineHeight: '1.2', margin: '0 4px' }}>
+      <span style={{ borderBottom: '1px solid', padding: '0 2px' }}><i>X<sub>3</sub>%</i></span>
+      <span>2</span>
+    </span>
+    )
+  </span>
+
+  <span style={{ display: 'inline-flex', alignItems: 'center' }}>
+    &times;(1-
+    <span style={{ display: 'inline-flex', flexDirection: 'column', textAlign: 'center', fontSize: '0.8em', lineHeight: '1.2', margin: '0 4px' }}>
+      <span style={{ borderBottom: '1px solid', padding: '0 2px' }}><i>X<sub>4</sub>%</i></span>
+      <span>2</span>
+    </span>
+    )
+  </span>
+</div>
+
+其中t<sub>c</sub>为冷却时间，t<sub>ic</sub>为默认冷却时间；X<sub>1</sub>至X<sub>4</sub>为该Portal上部署的（如有）四个Heatsink的冷却时间缩减倍率，且X<sub>1</sub>>X<sub>2</sub>>X<sub>3</sub>>X<sub>4</sub>。
+
+如果你Hack的是友方Portal，t<sub>ic</sub>取值 180 秒；反之，中立Portal和敌方Portal的t<sub>ic</sub>均为 300 秒。
 
 
-### Hack烧毁
+### Hack熔毁
+
+默认情况下，由一次Hack为计时起点的4小时熔毁窗口中可以进行4次Hack。通过部署[Multihack](/INGRESS-GUIDE/reference/farmmod/#multihack)可以增加该窗口内的可Hack次数。
+
+在多个Multihack叠加时，Portal的熔毁次数变化遵循如下公式：
+
+<div style={{ 
+  display: 'flex', 
+  flexWrap: 'wrap', 
+  justifyContent: 'center', 
+  alignItems: 'center', 
+  gap: '12px 4px', 
+  fontFamily: '"Cambria Math", "Times New Roman", serif', 
+  fontSize: '1.25rem', 
+  margin: '2rem 0' 
+}}>
+  
+  <span style={{ display: 'inline-flex', alignItems: 'center' }}>
+    <i>N<sub>b</sub></i> &nbsp;=&nbsp; <i>N<sub>ib</sub></i>
+  </span>
+
+  <span style={{ display: 'inline-flex', alignItems: 'center' }}>
+    +n<sub>1</sub>+ 
+  </span>
+
+  <span style={{ display: 'inline-flex', alignItems: 'center' }}>
+    <span style={{ display: 'inline-flex', flexDirection: 'column', textAlign: 'center', fontSize: '0.8em', lineHeight: '1.2', margin: '0 4px' }}>
+      <span style={{ borderBottom: '1px solid', padding: '0 2px' }}><i>n<sub>2</sub></i></span>
+      <span>2</span>
+    </span>
+  </span>
+  <span style={{ display: 'inline-flex', alignItems: 'center' }}>
+    \+
+    <span style={{ display: 'inline-flex', flexDirection: 'column', textAlign: 'center', fontSize: '0.8em', lineHeight: '1.2', margin: '0 4px' }}>
+      <span style={{ borderBottom: '1px solid', padding: '0 2px' }}><i>n<sub>3</sub></i></span>
+      <span>2</span>
+    </span>
+  </span>
+
+  <span style={{ display: 'inline-flex', alignItems: 'center' }}>
+    \+
+    <span style={{ display: 'inline-flex', flexDirection: 'column', textAlign: 'center', fontSize: '0.8em', lineHeight: '1.2', margin: '0 4px' }}>
+      <span style={{ borderBottom: '1px solid', padding: '0 2px' }}><i>n<sub>4</sub></i></span>
+      <span>2</span>
+    </span>
+  </span>
+</div>
+
+其中N<sub>b</sub>为熔毁前可Hack次数，N<sub>ib</sub>为默认熔毁前可Hack次数；n<sub>1</sub>至n<sub>4</sub>为该Portal上部署的（如有）四个Multihack的冷却时间缩减倍率，且n<sub>1</sub>>n<sub>2</sub>>n<sub>3</sub>>n<sub>4</sub>。
+
+其规律与Heatsink的衰减规律大致类似：第一个Mod能发挥全部效果，后续仅发挥一半效果。
 
 ### 出射连线数量上限
 

@@ -3,5 +3,25 @@ title: Recursion/转生
 ---
 
 import { Image } from 'astro:assets';
-import PicOne from '../../../assets/ingress.png';
+import recursion from '../../../assets/recursion.png';
+import wings from '../../../assets/wings.png';
+import simulacrum from '../../../assets/simulacrum.webp';
 
+当你达到最高等级16级后，你可以选择转生（Recurse）来将你的AP清0，回到1级重新玩一遍游戏，按钮在[个人页面](INGRESS-GUIDE/guides/scanner/#14%E4%B8%AA%E4%BA%BA%E9%A1%B5%E9%9D%A2)的最底部。这是一项不可逆的操作，在选择同意后会有4个小时的冷静期。
+
+<div style="display: flex; justify-content: center; width: 100%;">
+<Image src={recursion} width={300} alt="" />
+</div>
+在转生过程中，你可以重新选择你所属的阵营。这也是目前唯一的变更阵营方式。
+
+在转生后，你会保留部分16级的权限，例如：
+
+- 你的充电距离及充电效率仍与16级时相同。
+- 你在周年庆时仍然会获得象征16级的黑牌。
+- 你的一些附属系统权限，比如任务申请、Portal申请、Portal审核等会被保留。
+- 你的所有物品、徽章等均会保留。
+
+区别在于：
+- 与等级物品相关的使用权限需要重新升级解锁。这意味着你刚转生后无法使用L8的XMP、Resonator和Power Cube等物品。
+- 你会获得一块Simulacrum（转生者）<Image src={simulacrum} alt="simulacrum" style={{ height: '2.5em', width: 'auto', verticalAlign: 'middle', display: 'inline-block', margin: '0 4px' }} /> 的无等级徽章。
+- 从此以后，你的名字出现在Scanner页面上时（不包括[COMM](/INGRESS-GUIDE/reference/comm/)），名字前都会附加一个小翅膀<Image src={wings} alt="north" style={{ height: '1.2em', width: 'auto', verticalAlign: 'middle', display: 'inline-block', margin: '0 4px' }} />。
