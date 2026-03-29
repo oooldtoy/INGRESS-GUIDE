@@ -10,29 +10,39 @@ import comm3 from '../../../assets/comm3.png';
 
 取决于你经由的入口不同，你可能会看到以下几个界面：
 
+### 游戏记录页面 
 
 <div style="display: flex; justify-content: center; width: 100%;">
 <Image src={comm1} width={300} alt="" />
 </div>
 
-游戏记录页面。你可以获知选定距离内发生的大部分游戏记录，以时间排序。该页面出现的游戏记录并不如[intel](/INGRESS-GUIDE/guides/intel/)全面，在这里仅讨论更加全面的intel log情况：
+你可以在游戏记录页面内获知选定距离内发生的大部分游戏记录，以时间排序。该页面出现的游戏记录并不如[intel](/INGRESS-GUIDE/guides/intel/)全面，在这里仅讨论更加全面的intel log情况：
 能够被玩家获取的游戏记录包括：
 - 部署：占领Portal、在空槽位上部署Resonator；部署Beacon。
 - 连线：连线的记录会出现在Link的中心位置附近，Control Field的记录会出现在三角形的中心附近。
 - 破坏：被破坏的Link、Control Field；被破坏的Resonator，被中立化的Portal。
 
+### 通知提醒页面
+
 <div style="display: flex; justify-content: center; width: 100%;">
 <Image src={comm3} width={300} alt="" />
 </div>
 
-通知提醒页面。这里会列出与你相关的游戏记录：例如你的Portal被攻击。
+通知提醒页面中会列出与你相关的游戏记录：例如你的Portal被攻击。
+
+### 聊天页面
 
 <div style="display: flex; justify-content: center; width: 100%;">
 <Image src={comm2} width={300} alt="" />
 </div>
 
-聊天页面。你可以在这里发送消息。
+你可以在聊天页面中向玩家发送消息。
 
 以你发送消息的位置为准，其他玩家只有将其COMM距离设定至大于你们之间距离时才能看到你的发言，除非你通过 @ID 来特意提及某个人。
 
-聊天页面分Faction（阵营）和Cross-Faction（跨阵营）两个频道。阵营频道的消息无法在游戏内被敌方阵营获知，但是应尽量避免在其中讨论不应被敌方阵营了解的内容。在阵营频道中，无法通过 @ID 通知敌方阵营的玩家，但是在跨阵营频道中这个操作是可行的。
+聊天页面分Faction（阵营）和Cross-Faction（跨阵营）两个频道。
+
+- 阵营频道的消息可以被所有阵营内、距离内玩家看到。
+    - 阵营频道消息无法在游戏内被敌方阵营获知，但是应尽量避免在其中讨论不应被敌方阵营了解的内容。
+    - 在阵营频道中，无法通过 @ID 通知敌方阵营的玩家，但是在跨阵营频道中这个操作是可行的。
+- 跨阵营频道中说的话可以被两阵营的所有距离内玩家看到。
