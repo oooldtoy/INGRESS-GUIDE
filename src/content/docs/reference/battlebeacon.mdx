@@ -8,55 +8,61 @@ import { Image } from 'astro:assets';
 import rareBbImg from '../../../assets/rarebattlebeacon.png';
 import veryRareBbImg from '../../../assets/veryrarebattlebeacon.png';
 
-Battle Beacon（战斗信标）是 Ingress 中一种特殊的竞技型消耗道具。与仅用于视觉标记的[普通信标 (Beacon)](/INGRESS-GUIDE/reference/beacon/) 不同，部署 Battle Beacon 会强制触发该 [Portal](/INGRESS-GUIDE/reference/portal/) 的区域争夺战（通常称为“打针”或“打塔”）。
+Battle Beacon（战斗信标）是 Ingress 中一种特殊的信标道具。与仅用于视觉标记的普通信标不同，部署 Battle Beacon 会强制触发该 [Portal](/INGRESS-GUIDE/reference/portal/) 的区域争夺战（通常称为“打针”或“打塔”）。
 
-### 战斗信标的种类
+### 战斗信标的种类与区别
 
-目前游戏中的战斗信标分为两种稀有度：
+目前游戏中的战斗信标分为两种稀有度，它们在购买条件、战斗流程和机制上有显著的区别：
 
 <div style="display: flex; gap: 20px; align-items: center; margin-bottom: 20px;">
-  <div>
-    <Image src={rareBbImg} alt="Rare Battle Beacon" width={80} />
+  <div class="not-content" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+    <div><Image src={rareBbImg} alt="Rare Battle Beacon" style={{ objectFit: 'cover', width: '80px', height: '80px', display: 'block' }} width={80} height={80} /></div>
   </div>
   <div>
-    **Rare Battle Beacon (稀有战斗信标)**<br/>
-    通常在商店（Store）中通过 CMU 购买获得。
+    **Rare Battle Beacon (稀有战斗信标，RBB)**<br/>
+    允许8级及以上的玩家使用 CMU 购买。
   </div>
 </div>
 
 <div style="display: flex; gap: 20px; align-items: center; margin-bottom: 20px;">
-  <div>
-    <Image src={veryRareBbImg} alt="Very Rare Battle Beacon" width={80} />
+  <div class="not-content" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+    <div><Image src={veryRareBbImg} alt="Very Rare Battle Beacon" style={{ objectFit: 'cover', width: '80px', height: '80px', display: 'block' }} width={80} height={80} /></div>
   </div>
   <div>
-    **Very Rare Battle Beacon (非常稀有战斗信标)**<br/>
-    通常通过特定活动（如 Anomaly 赛事阶段）或部分特殊的 Passcode 获得。部分机制比稀有版本更强。
+    **Very Rare Battle Beacon (非常稀有战斗信标，VRBB)**<br/>
+    仅允许 AP 达到 40,000,000 (Level 16) 或已[转生](/INGRESS-GUIDE/gameplay/recursion/)的玩家购买（单价 5,000 CMU）。转生玩家每月的 C.O.R.E. 订阅礼包中也会包含 1 个。
   </div>
 </div>
 
-### 如何部署
+### 详细参数对比
 
-部署方法与普通 Beacon 和 [Fracker](/INGRESS-GUIDE/reference/fracker/) 相同：
+以下是[官方](https://support.ingress.com/hc/en-us/articles/41140407434651-Battle-Beacon-FAQs)对两种战斗信标的对比:
 
-1. 靠近目标 Portal 直至进入互动范围（40米）。
-2. 打开主界面的 **Inventory（物品栏）**。
-3. 找到 Battle Beacon 道具，点击 **USE**。
-4. 在地表地图上点击选择你想部署的目标 Portal。
 
-成功部署会给予玩家 **500 AP** 奖励，并立即触发该 Portal 的战斗阶段。
+| 特性 | Rare Battle Beacon (稀有) | Very Rare Battle Beacon (非常稀有) |
+| :--- | :--- | :--- |
+| **部署成本** | 消耗 800 XM | 消耗 1000 XM |
+| **预警期** | 部署后 **10 分钟** 开始战斗 | 部署后 **立即** 开始战斗 |
+| **时间与回合数** | 10 分钟预热 + **3 个 Checkpoints (CP)**<br/>（每个 CP 间隔 3 分钟）<br/>战斗持续时间 9 分钟（总耗时 19 分钟） | 无预热 + **5 个 Checkpoints (CP)**<br/>（每个 CP 间隔 3 分钟）<br/>战斗持续时间 15 分钟 |
+| **回合分值** | 2 - 3 - 4 | 1 - 2 - 2 - 3 - 4 |
+| **阵营翻转机制** | 结算时**不会**导致 Portal 阵营翻转<br/>无部署免疫期（阵营改变时另一方可立即部署） | 每个 Checkpoint 结算时，Portal **阵营会翻转**<br/>且会产生免疫期（被摧毁后，原占领方有一段短暂时间无法部署新 Resonator） |
+| **结算奖励 (10分钟)** | Hack 产出提升 1.25x - 2.5x | Hack 产出提升 1.25x - 2.5x |
+| **获胜方信标标记** | 获胜方信标将保留显示 **1 小时**<br/>（不触发烟花特效） | 获胜方信标将保留显示 **4 小时**<br/>**且部署获胜阵营的烟花 (Fireworks)** |
 
-### 战斗阶段机制 (Checkpoints)
+*(注：在获胜方的胜利信标存在期间，该 Portal 无法被部署任何新的 Beacon)*
 
-当 Battle Beacon 部署后，Portal 上方会显示一个倒计时指示器，随后会经历多个**回合（Checkpoints/CP）**的争夺。
+### VRBB 的实际应用
 
-*（注：此部分具体每个回合的时间、分数计算和反转机制，建议根据当前最新的赛事/游戏规则进行补充完善）*
+VRBB 在每次 Checkpoint 结算时强制翻转 Portal 阵营的机制，提供了一个与常规翻转道具（[毒/Flipcard](/INGRESS-GUIDE/reference/flipcard/)）**完全独立**的阵营翻转手段。
 
-一般流程为：
-1. **预警期**：部署后，周边所有玩家会在 Scanner 和 COMM 中收到通知。
-2. **多轮回合战**：在每个 CP 结算时，系统会判定哪一方阵营控制了该 Portal（看插了哪一方的 Resonator）。控制方会获得相应的得分。
-3. **极化反转**：在特定的 CP 结算后，系统可能会强制翻转 Portal 的阵营（摧毁防守方 Resonator，或直接将其转变为敌方阵营），以强制玩家进行交火争夺。
-4. **结算**：所有回合结束后，系统汇总双方得分，在 COMM 中播报最终胜负。参与战斗（部署 Resonator、摧毁等行为）的玩家通常会获得额外的 AP 奖励或计入相关的牌子（Medal）数据。
+在 Ingress 中，同一个玩家在同一个 Portal 上部署高级 Resonator（如 L8）的数量是[有严格限制的](/INGRESS-GUIDE/guides/deploy/)（每人最多插 1 个 L8）。通常要建立一个 L8 Portal必须凑齐 8 名达到 8 级的同阵营玩家。然而，借助VRBB的翻转机制，玩家可以通过“部署 -> 翻转 -> 使用毒以改变脚归属 -> 再次部署”的方式，最大化少人数情况下的8脚部署量。
 
-<Aside type="tip">
-Battle Beacon 常用于线下玩家聚会对抗（NIA 官方的 Hexathlon 甚至 Anomaly 核心玩法都基于此），或者用于刷取特定需要“摧毁并占领”的数据。
-</Aside>
+两种不同翻转免疫的情况：
+
+1. 使用常规“毒”（ADA/Jarvis）翻转 Portal 后，该 Portal 会进入 **1 小时的毒免疫期**，期间无法再次被毒翻转。
+2. **VRBB 的翻转无视毒免疫，且 VRBB 造成的翻转也不会触发毒免疫**。
+
+通过合理使用 ADA、Jarvis 和 VRBB，少数玩家可以在短时间内重置自己在该 Portal 上的部署计数，从而在同一个 Portal 上插上原本受限的多个 L8 Resonator。
+
+具体的操作序列和计算逻辑非常复杂，如果你有兴趣进行这种极限操作，建议使用社区玩家开发的模拟器进行推演和练习：
+👉 [VRBB-L8-Maximizer 模拟器](https://xelminoe.github.io/VRBB-L8-Maximizer/)

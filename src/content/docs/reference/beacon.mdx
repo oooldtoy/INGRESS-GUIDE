@@ -17,13 +17,9 @@ Beacon（信标）是一种可部署在 [Portal](/INGRESS-GUIDE/reference/portal
 
 Beacon 无法通过普通 [Hack](/INGRESS-GUIDE/guides/hack/) 获得，主要来源包括：
 
-- **游戏商店（Store）**：通过充值购买，单个或套装形式出售。
-- **活动奖励**：部分官方活动、纪念日活动或比赛会以 Beacon 作为奖品发放。
-- **Passcode 兑换**：特定活动的 Passcode 有时包含 Beacon。
-
-<Aside type="tip">
-Beacon 属于付费/稀有道具，使用前请确认目的，避免浪费。
-</Aside>
+- 可以通过充值在游戏商店里购买，单个或套装形式出售。
+- 部分官方活动、纪念日活动或比赛会以 Beacon 作为奖品发放。
+- 通过[动能桶](/INGRESS-GUIDE/reference/kineticcapsule/)合成。
 
 ### Beacon 的种类
 
@@ -31,9 +27,9 @@ Beacon 有多种外观图案和功能，主要类型包括：
 
 | 类型 | 说明 | 持续时间 |
 | :--- | :--- | :--- |
-| **基础 Beacon** | 商店通用版本，有多种配色图案可选<br /><Image src={beaconImg} alt="Beacon" width={60} /> | 4小时 |
-| **阵营 Fireworks** | 阵营专属信标（启蒙军和反抗军），部署后呈现阵营标志图案<br /><Image src={fireworkEnlImg} alt="ENL Fireworks" width={60} /> <Image src={fireworkResImg} alt="RES Fireworks" width={60} /> | 10分钟 |
-| **Battle Beacon** | 战斗信标分为 Rare (稀有) 和 Very Rare (非常稀有) 两种。用于触发 Portal 对抗事件，详情请参考 [Battle Beacon](/INGRESS-GUIDE/reference/battlebeacon/) 页面。<br /><Image src={rareBbImg} alt="Rare Battle Beacon" width={60} /> <Image src={veryRareBbImg} alt="VR Battle Beacon" width={60} /> | 视阶段而定 |
+| **基础 Beacon** | 商店通用版本，有多种配色图案可选<br/><br/><div class="not-content" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}><div><Image src={beaconImg} alt="Beacon" style={{ objectFit: 'cover', width: '254px', height: '200px', display: 'block' }} width={254} height={200} /></div></div> | 4小时 |
+| **阵营 Fireworks** | 阵营专属信标（启蒙军和反抗军），部署后呈现阵营标志图案<br/><br/><div class="not-content" style={{ display: 'flex', justifyContent: 'center', gap: '20px', alignItems: 'center' }}><div><Image src={fireworkEnlImg} alt="ENL Fireworks" style={{ objectFit: 'cover', width: '254px', height: '200px', display: 'block' }} width={254} height={200} /></div><div><Image src={fireworkResImg} alt="RES Fireworks" style={{ objectFit: 'cover', width: '254px', height: '200px', display: 'block' }} width={254} height={200} /></div></div> | 10分钟 |
+| **Battle Beacon** | 战斗信标分为 Rare (稀有) 和 Very Rare (非常稀有) 两种。用于触发 Portal 对抗事件，详情请参考 [Battle Beacon](/INGRESS-GUIDE/reference/battlebeacon/) 页面。<br/><br/><div class="not-content" style={{ display: 'flex', justifyContent: 'center', gap: '20px', alignItems: 'center' }}><div><Image src={rareBbImg} alt="Rare Battle Beacon" style={{ objectFit: 'cover', width: '254px', height: '200px', display: 'block' }} width={254} height={200} /></div><div><Image src={veryRareBbImg} alt="VR Battle Beacon" style={{ objectFit: 'cover', width: '254px', height: '200px', display: 'block' }} width={254} height={200} /></div></div> | 视阶段而定 |
 
 ### Beacon 的部署
 
@@ -50,17 +46,19 @@ Beacon 有多种外观图案和功能，主要类型包括：
 
 不同类型的 Beacon 持续时间不同。普通基础 Beacon 的存在时间为 **4小时**，而阵营 Fireworks 的存在时间只有 **10分钟**。时间耗尽后图案自动消失，Portal 恢复正常外观。
 
-每个 Portal 同一时间只能存在一个 Beacon（Battle Beacon 除外）；若重复部署，新的 Beacon 会覆盖旧的。
+每个 Portal 同一时间只能存在一个 Beacon，因此我们通常称Beacon也存在“免疫”，即在目前已经存在一个Beacon的前提下无法部署另一个Beacon。
 
-<Aside type="caution">
+烟花（Fireworks）不受该限制：即使Beacon正在生效，也可以再插上一根烟花。
+
+<Aside>
 基础 Beacon 和 Fireworks 不影响任何游戏数值，不提供 AP，也不改变 Portal 的 Hack 产出或防御能力，仅为视觉标记效果。
 </Aside>
 
 ### Portal Fracker
 
-[Portal Fracker（破解器）](/INGRESS-GUIDE/reference/fracker/) 虽然在背包中与 Beacon 放在一起，且部署方式相似，但它是**完全不同的功能性道具**。
+[Portal Fracker（薯条）](/INGRESS-GUIDE/reference/fracker/) 虽然在背包中与 Beacon 放在一起，且部署方式相似，但它是**完全不同的功能性道具**。
 
-- 部署 Fracker 会大幅提高 Portal 的物资掉落（双倍产出），是用于建立“闪建农场”的核心道具。
+- 部署 Fracker 会大幅提高 Portal 的物资掉落（双倍产出），通常在[起8](/INGRESS-GUIDE/reference/portal/#portal%E7%9A%84%E7%AD%89%E7%BA%A7)或需要快速大量Hack钥匙时使用。
 - Fracker 有明确的副作用和数量/时间限制。
 
-详细机制与使用方法，请查看 [Portal Fracker 专用页面](/INGRESS-GUIDE/reference/fracker/)。
+详细机制与使用方法，请查看 [Portal Fracker](/INGRESS-GUIDE/reference/fracker/)。
