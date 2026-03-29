@@ -1,0 +1,38 @@
+---
+title: Portal Fracker/破解器
+---
+
+import { Aside } from '@astrojs/starlight/components';
+
+Portal Fracker（破解器）是一种功能性消耗道具，主要用于在短时间内大幅提高 [Portal](/INGRESS-GUIDE/reference/portal/) 的产出效率，非常适合多名特工聚集在一起建立“闪建农场”（Flash-farm）时使用。
+
+### Fracker 的功能
+
+当你在一个 Portal 上部署 Fracker 后，它会产生以下效果：
+
+- **双倍产出**：在 Fracker 生效期间，所有对该 Portal 进行 [Hack](/INGRESS-GUIDE/guides/hack/) 的特工，其获得的掉落物品数量翻倍（包括 Portal Key）。
+  - *注意：翻倍的物品种类相同，但稀有度可能不同（例如 Hack 出一个 VRHS，翻倍赠送的可能是一个 CHS）。*
+- **共享效果**：无论由谁部署，所有特工（包括敌对方）在该 Portal 上的 Hack 产出都会受到双倍加成。
+- **不改变规则**：Fracker 不会改变 Portal 的冷却时间（Cooldown），也不会改变导致 Portal 过热（Burnout）的最大 Hack 次数。它也不占用 Portal 的 Mod 槽位。
+
+### 持续时间与副作用
+
+Portal Fracker 的效果是暂时性的，会在满足以下**任一条件**时失效：
+
+1. **持续 10 分钟**。
+2. 该 Portal 被所有特工**累计 Hack 达 150 次**。
+
+<Aside type="caution">
+**副作用**：当 Fracker 失效（无论是时间到还是次数耗尽）时，该 Portal 上部署的**所有 Resonator 会立刻损失 50% 的当前 XM 电量**。如果不及时充电，Portal 很容易被敌方摧毁或自然衰减掉。
+</Aside>
+
+### 部署方法与获取
+
+- **部署方式**：
+  进入目标 Portal 的互动范围（40米）后，打开主界面的 **Inventory（物品栏）**，找到 Portal Fracker，点击 **USE**，然后在地表上点击选择目标 Portal 进行确认部署。部署一个 Fracker 会给予玩家 **500 AP**。
+- **获取方式**：
+  Fracker 属于付费道具（Premium Item），**无法通过 Hack 获得**，也不能被丢弃（Drop）或回收（Recycle）。玩家只能在游戏内的 Store（商店）使用 CMU 购买。
+
+<Aside type="tip">
+**高效使用建议**：为了最大化利用 Fracker 的 10 分钟时间，建议在 Portal 上部署 Very Rare Multi-hack (VRMH) 和 Very Rare Heat Sink (VRHS)，并组织多名特工同时快速 Hack。
+</Aside>

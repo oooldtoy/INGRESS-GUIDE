@@ -1,0 +1,62 @@
+---
+title: Battle Beacon/战斗信标
+---
+
+import { Aside } from '@astrojs/starlight/components';
+import { Image } from 'astro:assets';
+
+import rareBbImg from '../../../assets/rarebattlebeacon.png';
+import veryRareBbImg from '../../../assets/veryrarebattlebeacon.png';
+
+Battle Beacon（战斗信标）是 Ingress 中一种特殊的竞技型消耗道具。与仅用于视觉标记的[普通信标 (Beacon)](/INGRESS-GUIDE/reference/beacon/) 不同，部署 Battle Beacon 会强制触发该 [Portal](/INGRESS-GUIDE/reference/portal/) 的区域争夺战（通常称为“打针”或“打塔”）。
+
+### 战斗信标的种类
+
+目前游戏中的战斗信标分为两种稀有度：
+
+<div style="display: flex; gap: 20px; align-items: center; margin-bottom: 20px;">
+  <div>
+    <Image src={rareBbImg} alt="Rare Battle Beacon" width={80} />
+  </div>
+  <div>
+    **Rare Battle Beacon (稀有战斗信标)**<br/>
+    通常在商店（Store）中通过 CMU 购买获得。
+  </div>
+</div>
+
+<div style="display: flex; gap: 20px; align-items: center; margin-bottom: 20px;">
+  <div>
+    <Image src={veryRareBbImg} alt="Very Rare Battle Beacon" width={80} />
+  </div>
+  <div>
+    **Very Rare Battle Beacon (非常稀有战斗信标)**<br/>
+    通常通过特定活动（如 Anomaly 赛事阶段）或部分特殊的 Passcode 获得。部分机制比稀有版本更强。
+  </div>
+</div>
+
+### 如何部署
+
+部署方法与普通 Beacon 和 [Fracker](/INGRESS-GUIDE/reference/fracker/) 相同：
+
+1. 靠近目标 Portal 直至进入互动范围（40米）。
+2. 打开主界面的 **Inventory（物品栏）**。
+3. 找到 Battle Beacon 道具，点击 **USE**。
+4. 在地表地图上点击选择你想部署的目标 Portal。
+
+成功部署会给予玩家 **500 AP** 奖励，并立即触发该 Portal 的战斗阶段。
+
+### 战斗阶段机制 (Checkpoints)
+
+当 Battle Beacon 部署后，Portal 上方会显示一个倒计时指示器，随后会经历多个**回合（Checkpoints/CP）**的争夺。
+
+*（注：此部分具体每个回合的时间、分数计算和反转机制，建议根据当前最新的赛事/游戏规则进行补充完善）*
+
+一般流程为：
+1. **预警期**：部署后，周边所有玩家会在 Scanner 和 COMM 中收到通知。
+2. **多轮回合战**：在每个 CP 结算时，系统会判定哪一方阵营控制了该 Portal（看插了哪一方的 Resonator）。控制方会获得相应的得分。
+3. **极化反转**：在特定的 CP 结算后，系统可能会强制翻转 Portal 的阵营（摧毁防守方 Resonator，或直接将其转变为敌方阵营），以强制玩家进行交火争夺。
+4. **结算**：所有回合结束后，系统汇总双方得分，在 COMM 中播报最终胜负。参与战斗（部署 Resonator、摧毁等行为）的玩家通常会获得额外的 AP 奖励或计入相关的牌子（Medal）数据。
+
+<Aside type="tip">
+Battle Beacon 常用于线下玩家聚会对抗（NIA 官方的 Hexathlon 甚至 Anomaly 核心玩法都基于此），或者用于刷取特定需要“摧毁并占领”的数据。
+</Aside>
