@@ -1,0 +1,79 @@
+---
+title: Damage/伤害计算
+---
+
+Ingress 中的伤害计算相对简单，但拥有几项独特的机制。整体而言，伤害主要受**距离衰减**、**暴击**和 **[防御值](/INGRESS-GUIDE/reference/mitigation/)** 的影响。
+
+### 1. 阶梯式距离衰减
+
+武器（如 XMP Burster、Ultra Strike）的伤害随距离衰减，衰减并非线性，而是根据距离目标（Resonator 或 Portal 中心）的比例呈**阶梯式下降**。
+
+将武器的**攻击生效范围**分为五个区间。假设 <i>r</i> 为（玩家到目标的实际距离 ÷ 武器最大攻击距离）：
+
+<ul>
+  <li><b>距离最近</b>（0 ≤ <i>r</i> ≤ 20%）：造成 <b>100%</b> 伤害</li>
+  <li><b>距离次近</b>（20% &lt; <i>r</i> ≤ 40%）：造成 <b>50%</b> 伤害</li>
+  <li><b>距离中等</b>（40% &lt; <i>r</i> ≤ 60%）：造成 <b>25%</b> 伤害</li>
+  <li><b>距离较远</b>（60% &lt; <i>r</i> ≤ 80%）：造成 <b>12.5%</b> 伤害</li>
+  <li><b>距离最远</b>（80% &lt; <i>r</i> ≤ 100%）：造成 <b>6.25%</b> 伤害</li>
+</ul>
+
+### 2. 攻击目标与结算方式
+
+攻击范围内的可见实体包含 **Resonator** 和 **Portal 本体（即 Mod）**，两者的受击结算是独立分开的：
+
+#### 对 Resonator的攻击
+- 伤害基于玩家位置到**每一个独立 Resonator** 的实际距离进行上述阶梯衰减计算。
+- 扣除对应 Resonator 的 XM（能量）。
+
+#### 对 Portal 本体的攻击
+- 伤害基于玩家到 **Portal 中心**的距离进行计算。
+- **Portal 本体不会掉血**。对 Portal 的攻击主要用于破坏其部署的 **Mod**，而这一过程完全取决于**是否触发暴击**。
+
+### 3. 暴击（Critical Hit）与 Mod 破坏
+
+攻击有一定概率触发暴击，暴击率受到武器等级和距离的影响。
+
+- 如果对 Resonator 触发暴击，会对其造成 **2 倍**的基础伤害。
+- Mod 脱落判定：暴击是对 Portal 上的 Mod 触发破坏判定的**唯一条件**。
+  - 每次暴击时，每个 Mod 会**单独**进行一次脱落判定。
+  - Mod 的 **[黏性](/INGRESS-GUIDE/reference/stickiness/)** 决定了它的抵抗力：例如，一个具有 40% 黏性的 Mod，在遭到暴击时有 40% 的概率不脱落（即 60% 的概率被破坏）。
+  - 如果一个 Mod 的黏性为 0%，则只要遭遇暴击必定脱落。
+
+### 4. 防御减免
+
+Resonator 受到的最终伤害会受到 Portal **[防御值](/INGRESS-GUIDE/reference/mitigation/)** 的百分比减免。
+
+- 防御值直接等于减伤百分比。例如，Portal 拥有 30 防御值，即代表最终减伤 30%。
+- Mod 和 Link 提供的最大有效减免上限为 **95%**。超出 95% 的防御值会作为“储备防御”生效。
+  - 例如：3 个 Aegis Shield（每个 70 防御值）总共可提供 210 防御值，此时实际生效的最终减伤为上限的 **95%**。
+  - 如果其中 1 个 Aegis Shield 被打掉，剩余 140 防御值，实际表现出的依然是 **95%** 减伤。
+  - 如果继续被打掉 1 个，只剩最后 1 个 Aegis Shield，防御值降为 70，此时实际表现就变成了 **70%** 减伤。
+
+---
+
+### 5. 最终伤害计算公式
+
+综合以上机制，对 Resonator 的最终伤害判定公式可以表示为：
+
+<div style={{
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  fontFamily: '"Cambria Math", "Times New Roman", serif',
+  fontSize: '1.25rem',
+  margin: '2rem 0',
+  flexWrap: 'wrap',
+  gap: '12px'
+}}>
+  <i>D<sub>Final</sub></i> = <i>D<sub>Base</sub></i> &times; <i>E(r)</i> &times; <i>C<sub>crit</sub></i> &times;(1+<i>C<sub>Bonus</sub>%</i>) &times;    [ 1 &minus; <i>min</i>( 95%, <i>M</i> ) ]
+</div>
+
+其中：
+- <i>D<sub>Base</sub></i> 为武器基础伤害
+- <i>E(r)</i> 为距离衰减系数 (根据距离分别为1.0, 0.5, 0.25, 0.125, 0.0625)
+- <i>C<sub>crit</sub></i> 为暴击系数 (触发=2, 未触发=1)
+- <i>C<sub>Bonus</sub></i> 为[蓄力攻击奖励](/INGRESS-GUIDE/guides/attack/#蓄力攻击)
+- <i>M</i> 为 Portal 的总防御减免百分比
+
+> **注意：** 该公式仅计算对 Resonator 造成的实质性 XM（血量）伤害。对于 Portal 本体的 Mod，仅在暴击时根据 Mod 的黏性概率计算是否破坏，不涉及血量计算。

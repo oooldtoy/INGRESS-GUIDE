@@ -1,0 +1,43 @@
+---
+title: Attack/攻击
+sidebar:
+  order: 6
+---
+
+import { Image } from 'astro:assets';
+import attack from '../../../assets/attack.png';
+import chargeattack from '../../../assets/chargeattack.gif';
+
+在 Ingress 中，攻击敌方阵营的 Portal 是获取 AP、摧毁敌方控制场（Control Field）并夺取据点的重要手段。在地图界面中[控制中心按键上滑](/INGRESS-GUIDE/guides/scanner/#4控制中心)，或者直接点击控制中心中的Attack图标，都可以进入攻击界面。
+
+<div style="display: flex; justify-content: center; width: 100%;">
+  <Image src={attack} alt="攻击界面" width={300} loading="eager" />
+</div>
+
+在攻击界面中，你可以选择并释放以下三种类型的攻击道具：
+
+- **[XMP Burster](/INGRESS-GUIDE/reference/xmp/)**：最常用的范围攻击武器，用于大面积摧毁 Resonator。
+- **[Ultra Strike](/INGRESS-GUIDE/reference/ultrastrike/)**：极小范围的定点高暴击武器，主要用于摧毁 Portal 中心的 Mod，或集中火力摧毁单个 Resonator。
+- **[Flip Card (毒)](/INGRESS-GUIDE/reference/flipcard/)**：包括 ADA Refactor 和 JARVIS Virus，可以直接将整个 Portal 的阵营强制翻转。
+
+### 蓄力攻击
+
+在使用 XMP Burster 或 Ultra Strike 攻击时，你可以通过长按 **FIRE** 按钮来触发一个向中心收缩的能量光圈。当光圈收缩到最小（最靠近中心点）的瞬间松开手指，可以获得**最高 20% 的额外攻击力和暴击率加成**。
+
+<div style="display: flex; justify-content: center; width: 100%;">
+  <Image src={chargeattack} alt="蓄力攻击" width={300} />
+</div>
+
+- 对于高等级武器（尤其是 L8 XMP 和 Ultra Strike），蓄力效果相当明显。
+- 即使没有在最完美的时机松手，只要进行了蓄力，依然会根据光圈的收缩程度获得 0% 到 19% 不等的加成。
+- 暴击率会受到蓄力加成，因此在破坏Mod时可以考虑蓄力释放Ultra Strike来提高破坏Mod的效率。
+
+### 伤害判定机制简述
+
+武器造成的伤害并非是固定的，它受到非常多因素的影响，包括但不限于：
+
+1. **距离衰减**：距离目标越远，造成的伤害越低，呈阶梯状下降。
+2. **暴击机制**：攻击有概率触发暴击，造成双倍伤害并判定是否摧毁 Mod。
+3. **防御减免**：Portal 安装的 Mod 和连接的 Link 会大幅度减免受到的伤害。
+
+如果你想更深入了解伤害计算公式和详细的减伤机制，请参考 **[伤害计算](/INGRESS-GUIDE/data/damage/)** 。

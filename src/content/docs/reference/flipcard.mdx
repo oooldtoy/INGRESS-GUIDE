@@ -1,5 +1,22 @@
 ---
-title: Jarvis Virus/ADA Refactor/毒
-description: 名词介绍
+title: Jarvis Virus / ADA Refactor (毒)
 ---
 
+**Jarvis Virus / ADA Refactor**（绿毒/蓝毒），是一种极其稀有（Very Rare）且强力的战术武器，可以强制转换目标 Portal 的阵营归属，且在转换过程中保留其上原有的所有 Resonator 和 Mod。
+
+游戏中存在两种毒：
+
+- **JARVIS Virus（绿毒）**：能将 Resistance占领的 Portal 翻转为 Enlightened阵营。
+- **ADA Refactor（蓝毒）**：能将 Enlightened占领的 Portal 翻转为 Resistance阵营。
+
+### 使用效果与机制
+
+1. 使用毒翻转 Portal 时，其上所有的 Resonator 和 Mod 都会被原封不动地保留下来，并随之转变为目标阵营的属性，同时所有的 Resonator 会被**完全充能（满血）**。
+2. 由于 Link 的两端必须属于同一阵营，翻转会导致该 Portal 上的Link和Control Field立刻被摧毁。此过程不会增加UPC，不会获得经验值。
+3. **所有权变更**
+   - 如果你把 Portal 翻转成**你自己的阵营**，Portal 本身及其上的所有 Resonator 和 Mod 的署名都会变成你的 ID。
+   - 如果你把 Portal 翻转成**敌对阵营**，所有权会被系统接管（绿军归属于 `__JARVIS__`，蓝军归属于 `__ADA__`）。
+4. 使用毒需要消耗大量 XM，消耗量为：`目标 Portal 等级 × 1,000 XM`。
+   由于你的可用 XM 必须大于或等于这个消耗量，因此这不仅意味着你必须有足够的 XM 储量，还意味着低等级玩家可能因为 XM 容量上限不足，而无法对高等级的 Portal 下毒（例如：5级或以下的玩家无法翻转8级 Portal）。
+5. 每次被翻转后，该 Portal 会获得 **1 小时的免疫期**。在此期间内，该 Portal 将免疫任何毒的效果，无法被再次翻转（如果尝试对处于免疫期的 Portal 下毒，阵营不会发生转变，毒会被消耗）。
+   - 在[XMA](/INGRESS-GUIDE/gameplay/xma/)或其他大型活动期间，免疫时间可能会发生变化。
