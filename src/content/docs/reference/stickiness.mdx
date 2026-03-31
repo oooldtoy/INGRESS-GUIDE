@@ -2,6 +2,31 @@
 title: Stickiness/黏性
 ---
 
-import { Image } from 'astro:assets';
-import PicOne from '../../../assets/ingress.png';
+**黏性 (Stickiness)** 是 Ingress 中各种 [Mod](/INGRESS-GUIDE/reference/mods/) 的隐藏防御属性。它决定了在遭到敌方武器攻击并触发**暴击**时，该 Mod 有多大的概率能够“黏”在槽位上不被破坏   。
 
+关于暴击与 Mod 脱落判定的详细机制，可以参考[伤害计算](/INGRESS-GUIDE/data/damage/#3-暴击critical-hit与-mod-破坏)    。
+
+### 各类 Mod 的黏性数值
+
+不同稀有度、不同种类的 Mod 拥有完全不同的黏性。一般来说，防御性 Mod 拥有较高的黏性，而生产类和功能类 Mod 大多没有黏性。
+
+以下是游戏中各类常见 Mod 的黏性数值：
+
+<div style="display: flex; justify-content: center; width: 100%;">
+
+| Mod 名称 | 稀有度 | 黏性 |
+| :--- | :---: | :---: |
+| **Portal Shield** | Common | 0% |
+| | Rare | 15% |
+|  | Very Rare | 45% |
+| **Aegis Shield** | Very Rare | 55% |
+| **Force Amp** | Rare | 0% |
+| **Turret** | Rare | 20% |
+| **Heat Sink** | Any | 0% |
+| **Multi-Hack** | Any | 0% |
+| **Link Amp** | Any | 0% |
+| **SoftBank Ultra Link** | Very Rare | 15% |
+| **ITO EN (-)** | Very Rare | 0% |
+| **ITO EN (+)** | Very Rare | 0% |
+
+</div>

@@ -3,5 +3,53 @@ title: Resonator/共振器
 ---
 
 import { Image } from 'astro:assets';
-import PicOne from '../../../assets/ingress.png';
 
+**Resonator (共振器)**，或简称“脚”，是 Ingress 中用于[占领和维持 Portal](/INGRESS-GUIDE/guides/deploy/) 的最基本且最重要的物品。
+
+由于玩家无法对非己方阵营Portal进行大部分操作（[Link](/INGRESS-GUIDE/guides/link/)、[Deploy](/INGRESS-GUIDE/guides/deploy/)等），且完整占领一个Portal会给予大量[AP](/INGRESS-GUIDE/data/accesspoint/)，因此Resonator是相当重要的资源。
+
+### 基本属性
+
+1. 每个 Portal 可以最多部署8个Resonator，它们均匀分布在相领45度角的8个方向上。仅有当 8 个槽位全部插满 Resonator 时，这个 Portal 才具备向外[连线（Link）](/INGRESS-GUIDE/guides/link/)的条件。
+
+2. Resonator 分为 1 到 8 级。玩家只能部署**不高于自己等级**的 Resonator。
+
+3. 每个等级的 Resonator 在完全充能时拥有的 **XM容量（血量）** 不同。等级越高的 Resonator 血量越厚，越难被敌方摧毁。
+   > **L1 - L8 容量依次为：1000, 1500, 2000, 2500, 3000, 4000, 5000, 6000 XM**
+
+4. 部署在 Portal 上的 Resonator 每天（24小时）会自动流失其满容量 **15%** 的 XM 。如果不进行[充能（Recharge）](/INGRESS-GUIDE/guides/recharge/)，7 天后（约 168 小时）其能量将流失殆尽，Resonator 将自行销毁。
+   > 当一个 Portal 上的所有 Resonator 都因能量耗尽或被摧毁而消失时，该 Portal 将恢复为中立状态，所有建立在它之上的连线和控制场都会随之消失。
+
+### 部署限制
+
+为了鼓励多名玩家合作共建高级 Portal，游戏对单个玩家在同一个 Portal 上可部署的高级 Resonator 数量做出了限制：
+
+<div style="display: flex; justify-content: center; width: 100%;">
+| Resonator 等级 | 单个玩家最大部署数量 |
+| :---: | :---: |
+| L1 | 8 |
+| L2 | 4 |
+| L3 | 4 |
+| L4 | 4 |
+| L5 | 2 |
+| L6 | 2 |
+| L7 | 1 |
+| L8 | 1 |
+</div>
+也就是说：
+- **单名玩家**最高只能独立建造出一个包含 `1个L8、1个L7、2个L6、2个L5、2个L4`，总等级为 **L5** 的 Portal。
+- 要建造一个满级（L8）的 Portal，至少需要 **8 名 8级以上** 的玩家每人插下 1 个 L8 Resonator 才能完成。
+
+### Resonator的升级
+
+你可以用更高级别的 Resonator 替换掉 Portal 上现有的低级 Resonator，前提是：
+  1. 你将要部署的新 Resonator 等级必须**高于**现有的。
+  2. 升级后，你在该 Portal 上的同等级 Resonator 数量没有超过上述的个人部署限制。
+
+升级后，你会获得略少于在空槽位上部署一个Resonator的经验值，前提是你升级的不是自己的脚。
+
+### 获取方式
+
+Resonator主要通过Hack获取，是Hack最主要的产出物资。
+
+Hack部署有[ITO +](/INGRESS-GUIDE/reference/farmmod/#itoentransmuter)的Portal可以大幅提高获取Resonator的效率。

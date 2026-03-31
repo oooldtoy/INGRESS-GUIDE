@@ -1,3 +1,42 @@
 ---
 title: Layer/图层
 ---
+
+import { Image } from 'astro:assets';
+import layer from '../../../assets/layer.png';
+
+在游戏主界面的右侧功能区中，你可以找到并打开[图层](/INGRESS-GUIDE/guides/scanner/#8图层)面板。图层功能允许你在地图上以特殊标记（即在 Portal 底部附加相应形状的几何标识）来筛选并显示具有特定状态的 Portal。
+
+<div class="not-content">
+  <div style={{ display: 'flex', justifyContent: 'center' }}>
+    <Image src={layer} width={300} alt="图层选择界面" loading="eager" />
+  </div>
+</div>
+
+### 操作方式
+
+在图层面板中，点击任意一个图层选项，地图上的相关 Portal 就会被加上特殊标识。其基础操作逻辑分为三步循环：
+
+1. **点击一次**：高亮显示 **“有”**（即满足或已完成该状态）的 Portal。例如，点击“已访问”图层时，你曾经访问过的 Portal 底部会出现紫色方块标识。
+2. **再点击一下**：切换为高亮显示 **“没有”**（即未满足或未完成该状态）的 Portal。此时图标上通常会亮起一条斜杠，地图上会标出你**尚未**访问过的 Portal，方便你前往探索。
+3. **第三次点击**：取消当前选项的所有高亮显示，地图恢复默认状态。
+
+### 图层功能
+
+如图所示，游戏目前支持以下图层，分别对应不同的功能与追踪目标：
+
+- **Visited（已访问）**
+  - 用于追踪你的 Unique Portal Visited (UPV) 记录。开启后，可以高亮你已经 Hack 过的 Portal（底部出现**紫色圆环**标识）或从未访问过的 Portal。
+
+- **Captured（已占领）**
+  - 用于追踪你的 Unique Portal Captured (UPC) 记录。开启后，可以高亮你曾经作为第一个部署 Resonator 而占领过的 Portal（底部出现**红色圆环**标识）或从未占领过的 Portal。
+
+- **Scout Controlled（侦察控制）**
+  - 用于追踪 Portal Scan（AR 扫描）的控制权状态。开启后，可以高亮你目前拥有 Scout Controller 状态的 Portal（底部出现**橙色圆环**标识）或尚未控制的 Portal。
+
+- **Dronenet（无人机网络）**
+  - 观察地图上可以进行无人机跳跃的 Portal。开启后，你可以观察到停靠在Portal上的蓝色或绿色[无人机](/INGRESS-GUIDE/guides/dronenet/)。
+
+- **Portal Keys（Portal 钥匙）**
+  - 用于快速在地图上区分你目前是否拥有该 Portal 的 Key。开启后，如果你当前物品栏中拥有该 Portal 的 Key，其底部会出现**黄色三角形**标识。
+

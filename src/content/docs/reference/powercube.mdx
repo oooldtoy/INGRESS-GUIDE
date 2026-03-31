@@ -1,3 +1,81 @@
 ---
 title: Power Cube/糖
 ---
+
+import { Image } from 'astro:assets';
+import powercube from '../../../assets/powercube.png';
+import hypercube from '../../../assets/hypercube.png';
+
+**Power Cube (糖)** 是一种可以用于直接补充玩家当前 **[XM](/INGRESS-GUIDE/reference/xm/)** 槽的消耗型物品。
+
+在进行 [Hack](/INGRESS-GUIDE/guides/hack/)、[部署](/INGRESS-GUIDE/guides/deploy/)、[攻击](/INGRESS-GUIDE/guides/attack/)、[充能](/INGRESS-GUIDE/guides/recharge/)等绝大部分操作或是遭到敌方 Portal 反击时，玩家都会消耗或损失 XM。当 XM 耗尽时，Scanner 将会失效，此时就需要使用 Power Cube 来快速补充能量。
+
+### 种类与特征
+
+Power Cube 分为普通糖（L1 - L8）和红糖（Hypercube）两种。
+
+<div class="not-content" style={{ display: 'flex',flexWrap: 'wrap', justifyContent: 'center', gap: '20px', alignItems: 'center' }}>
+  <div style={{ textAlign: 'center' }}>
+    <Image
+      src={powercube}
+      width={150}
+      height={220}
+      loading="eager"
+      style={{ objectFit: 'contain', width: '150px', height: '150px', display: 'block' }}
+      alt="L8 Power Cube"
+    />
+    <p style={{ marginTop: '8px', fontSize: '0.9em' }}><b>普通糖</b></p>
+  </div>
+  <div style={{ textAlign: 'center' }}>
+    <Image
+      src={hypercube}
+      width={150}
+      height={220}
+      loading="eager"
+      style={{ objectFit: 'contain', width: '150px', height: '150px', display: 'block' }}
+      alt="Hypercube"
+    />
+    <p style={{ marginTop: '8px', fontSize: '0.9em' }}><b>红糖</b></p>
+  </div>
+</div>
+
+#### 1. 普通糖
+
+普通糖分为 1 到 8 级。使用或回收一颗普通能量块时，为你补充的 XM 数量计算公式为：
+> **补充 XM量 = 能量块等级 × 1,000**
+
+玩家只能 **“使用”** 不高于自身等级的 Power Cube。例如，一个 5 级玩家无法直接点击“Use”使用 6 级或更高级别的 Power Cube，但游戏机制允许任何等级的玩家 **“回收”** 任何等级的物品。由于回收 Power Cube 获得的 XM 数量等于直接使用它回复的 XM 数量，因此低级玩家可以通过“回收”高级能量块来实现无损变相“使用”。
+
+#### 2. 红糖
+
+Hypercube是一种特殊的糖。它可以为玩家提供一个持续生效的后备XM槽，使用后表现为Scanner 界面左上角的 XM 能量条右侧额外的粉红色能量槽。
+
+一颗 Hypercube 提供的总 XM 储备量与玩家的[等级](/INGRESS-GUIDE/data/level/#升级收益)相关。具体见下表：
+<div style="display: flex; justify-content: center; width: 100%;">
+
+| 玩家等级 | 单颗红糖提供 XM 量 | 玩家等级 | 单颗红糖提供 XM 量 |
+| :---: | ---: | :---: | ---: |
+| **L1** | 18,000 XM | **L9** | 36,000 XM |
+| **L2** | 20,250 XM | **L10** | 38,400 XM |
+| **L3** | 22,500 XM | **L11** | 40,800 XM |
+| **L4** | 24,750 XM | **L12** | 43,200 XM |
+| **L5** | 27,000 XM | **L13** | 45,600 XM |
+| **L6** | 29,250 XM | **L14** | 48,000 XM |
+| **L7** | 31,500 XM | **L15** | 50,400 XM |
+| **L8** | 33,750 XM | **L16** | 52,800 XM |
+
+</div>
+
+- 在玩家消耗 XM时，被消耗的XM会自动从这粉红色储备槽中补充，直到 Hypercube 储备能量耗尽为止。
+- 只有当前没有生效的 Hypercube 时才可以再次使用。如果在红糖生效期间，你无法使用另一颗红糖。
+- 红糖仅作为**后备补充**，无法视作提高 XM 槽上限的手段。这意味着，进行某些单次需要大量消耗 XM 的行为时（比如使用[毒](/INGRESS-GUIDE/reference/flipcard/)），如果所需 XM 超过了你主槽的上限，红糖无法帮你绕过这个限制，你依然无法进行该操作。
+- 不同于普通能量块，Hypercube 只能通过“使用（Use）”来激活储备槽，将其“回收（Recycle）”只会获得微不足道的160 XM，很不划算。
+
+
+### 获取方式
+
+Power Cube可以从Hack中获取，这包括普通的等级Power Cube和Hypercube。后者属于VR道具中掉落率较高的道具。
+
+### 快速使用
+
+你可以在游戏主页面的[快速补充按钮](/INGRESS-GUIDE/guides/scanner/#11xm补充)中快速使用各类Power Cube。同时，在[攻击](/INGRESS-GUIDE/guides/attack/)页面滑至左侧也能快速使用Power Cube。

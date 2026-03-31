@@ -3,9 +3,26 @@ title: Shield/盾
 ---
 
 import { Image } from 'astro:assets';
-import PicOne from '../../../assets/ingress.png';
 
-### 护盾
+**Shield (护盾)** 是 Ingress 中最重要的防御性 Mod，它的主要作用是为所在的 Portal 提供额外的 **[防御值](/INGRESS-GUIDE/reference/mitigation/)**，从而大幅减少敌方在使用 [XMP Burster](/INGRESS-GUIDE/reference/xmp/) 或 [Ultra Strike](/INGRESS-GUIDE/reference/us/) 攻击时对 Resonator 造成的伤害。
 
-### Aegis护盾
+### 基本属性
 
+护盾分为四种不同的稀有度。稀有度越高的护盾，提供的防御值越高，也越难被破坏。同Portal上多个Shield的防御值是完全**线性叠加**的。
+
+<div style="display: flex; justify-content: center; width: 100%;">
+
+| 护盾种类 | 防御值 | [黏性](/INGRESS-GUIDE/reference/stickiness/) | 说明 |
+| :--- | :---: | :---: | :--- |
+| **Common Shield (CS)** | +30 | 0% | 最容易Hack出的Mod |
+| **Rare Shield (RPS)** | +40 | 15% | - |
+| **Very Rare Shield (VRPS)** | +60 | 45% | - |
+| **Aegis Shield (AXA)** | +70 | 55% | 最强护盾 |
+
+</div>
+
+关于部署多个高级护盾时可能触发的伤害减免上限溢出机制，请参阅 **[防御值与储备防御](/INGRESS-GUIDE/reference/mitigation/#防御减免上限与储备防御)**。
+
+### 获取方式
+
+Shield主要通过Hack产出。 VRPS可以通过[动能桶](/INGRESS-GUIDE/reference/kineticcapsule/)合成。
