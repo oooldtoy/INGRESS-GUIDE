@@ -75,14 +75,38 @@
 		let guessed = [];
 		for (const key in glyphJson) {
 			let score = 0;
+			// Special handler for alternative/buggy patterns
+			let matchSegments = glyphJson[key].segments;
+			if (glyphJson[key].buggyPoints) {
+				const buggySegments = segmentsFromPoints(glyphJson[key].buggyPoints);
+				// If user matched buggy segments better, use those for scoring
+				let scoreNormal = 0;
+				let scoreBuggy = 0;
+				segments.forEach((segment) => {
+					if (matchSegments.includes(segment)) scoreNormal++;
+					else scoreNormal--;
+				});
+				scoreNormal /= matchSegments.length;
+
+				segments.forEach((segment) => {
+					if (buggySegments.includes(segment)) scoreBuggy++;
+					else scoreBuggy--;
+				});
+				scoreBuggy /= buggySegments.length;
+
+				if (scoreBuggy > scoreNormal) {
+					matchSegments = buggySegments;
+				}
+			}
+
 			segments.forEach((segment) => {
-				if (glyphJson[key].segments.includes(segment)) {
+				if (matchSegments.includes(segment)) {
 					score++;
 				} else {
 					score--;
 				}
 			});
-			score /= glyphJson[key].segments.length;
+			score /= matchSegments.length;
 			guessed.push({ name: glyphJson[key].name, score, points: glyphJson[key].points });
 		}
 		guessed.sort((a, b) => b.score - a.score);
@@ -104,19 +128,33 @@
 	let glyph_render;
 	const drawGlyph = (points) => {
 		ctx_draw.reset();
-		ctx_draw.strokeStyle = '#eee';
-		ctx_draw.lineWidth = 2;
+		ctx_draw.strokeStyle = '#43e061';
+		ctx_draw.lineWidth = 4;
+		ctx_draw.lineCap = 'round';
+		ctx_draw.lineJoin = 'round';
+		ctx_draw.shadowColor = 'rgba(67, 224, 97, 0.6)';
+		ctx_draw.shadowBlur = 10;
 		ctx_draw.beginPath();
+
+		let first = true;
 		points.split('').forEach((g) => {
 			if (glyphPoints[g]) {
-				ctx_draw.lineTo(cx + glyphPoints[g].dx, cy + glyphPoints[g].dy);
+				if (first) {
+					ctx_draw.moveTo(cx + glyphPoints[g].dx, cy + glyphPoints[g].dy);
+					first = false;
+				} else {
+					ctx_draw.lineTo(cx + glyphPoints[g].dx, cy + glyphPoints[g].dy);
+				}
 			} else {
 				if (g === '-') {
 					ctx_draw.closePath();
+					first = true; // reset for next path
 				}
 			}
 		});
 		ctx_draw.stroke();
+		ctx_draw.shadowBlur = 0; // reset
+
 		ctx_render.reset();
 		ctx_render.drawImage(layer_bg, 0, 0, width, height);
 		ctx_render.drawImage(layer_draw, 0, 0, width, height);
@@ -172,8 +210,8 @@
 		ctx_bg.lineWidth = 2;
 		ctx_bg.strokeStyle = outlineColor;
 		ctx_bg.fillStyle = backgroundColor;
-		ctx_bg.fill(hexagon);
-		ctx_bg.stroke(hexagon);
+		// ctx_bg.fill(hexagon);
+		// ctx_bg.stroke(hexagon);
 
 		ctx_bg.strokeStyle = '#ccc7';
 		ctx_bg.lineWidth = 1;
@@ -181,7 +219,7 @@
 			ctx_bg.beginPath();
 			ctx_bg.arc(cx + glyphPoints[key].dx, cy + glyphPoints[key].dy, lineWidth, 0, 2 * Math.PI);
 			ctx_bg.closePath();
-			ctx_bg.stroke();
+			// ctx_bg.stroke();
 		}
 		ctx_bg.save();
 		if (drawable) {

@@ -278,7 +278,6 @@
     });
 
       let bestMatch: any = null;
-      let highestScore = -1;
 
       for (const glyph of glyphsData as any[]) {
         const gSegments = glyph._segments;
@@ -286,20 +285,23 @@
         if (userSegments.length === gSegments.length &&
             userSegments.every((seg, i) => seg === gSegments[i])) {
           bestMatch = glyph;
-          highestScore = 1;
           break;
         }
+
+        // To recognize a glyph, user must draw exactly the same number of segments,
+        // and all drawn segments must match the target glyph.
+        // We do not allow partial matches with missing segments or extra segments.
+        if (userSegments.length !== gSegments.length) continue;
 
         let matches = 0;
         userSegments.forEach(seg => {
           if (gSegments.includes(seg)) matches++;
         });
 
-        const score = (matches / gSegments.length) - ((userSegments.length - matches) * 0.5);
-
-        if (score > highestScore && score > 0.5) {
-          highestScore = score;
+        // Exact match of segments (ignoring order)
+        if (matches === gSegments.length) {
           bestMatch = glyph;
+          break;
         }
       }
 
@@ -319,7 +321,6 @@
         return;
       }
 
-      const primaryName = glyph.name[0];
       nameEl.textContent = glyph.name.join(' / ');
       nameEl.className = 'glyph-name matched';
 
@@ -435,16 +436,11 @@
 
 <style is:global>
   .glyph-module-container {
-    margin: 2rem 0;
-    padding: 1.5rem;
-    background: var(--sl-color-bg-nav);
-    border: 1px solid var(--sl-color-gray-5);
-    border-radius: 8px;
     font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 1.5rem;
+    gap: 0.5rem;
   }
 
   .glyph-interactive-area {
@@ -456,11 +452,9 @@
 
   #glyph-canvas {
     background: transparent; /* Changed from #050505 to match theme */
-    border-radius: 4px;
-    box-shadow: 0 0 10px rgba(67, 224, 97, 0.1);
     cursor: crosshair;
     touch-action: none;
-    border: 1px solid var(--sl-color-gray-5);
+    outline: none;
   }
 
   .glyph-result-panel {
@@ -473,7 +467,6 @@
     margin-top: 0;
     margin-bottom: 1rem;
     padding-bottom: 0.5rem;
-    border-bottom: 1px solid var(--sl-color-gray-5);
     font-size: 1.5rem;
     text-transform: uppercase;
     letter-spacing: 2px;
