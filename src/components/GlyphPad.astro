@@ -1,0 +1,605 @@
+<div class="glyph-module-container not-content">
+  <div class="glyph-interactive-area">
+    <canvas id="glyph-canvas" width="300" height="300"></canvas>
+  </div>
+
+  <div class="glyph-result-panel">
+    <h3 id="glyph-name-display" class="glyph-name">Draw a Glyph</h3>
+
+    <div id="sequence-results" class="sequence-list">
+      <!-- Sequences will be injected here -->
+    </div>
+  </div>
+</div>
+
+<script>
+  import glyphsData from '../assets/Glyph/glyphs.json';
+  import sequencesData from '../assets/Glyph/glyph sequence.json';
+
+  class GlyphPad {
+    canvas!: HTMLCanvasElement;
+    ctx!: CanvasRenderingContext2D;
+    width!: number;
+    height!: number;
+    cx!: number;
+    cy!: number;
+    R!: number;
+    nodes!: Record<string, { dx: number, dy: number, x: number, y: number }>;
+    isDrawing!: boolean;
+    drawnPath!: string[];
+    currentMousePos!: { x: number, y: number } | null;
+    hoveredNode!: string | null;
+    colors!: Record<string, string>;
+
+    constructor(canvasId: string) {
+      this.canvas = document.getElementById(canvasId) as HTMLCanvasElement;
+      if (!this.canvas) return;
+
+      this.ctx = this.canvas.getContext('2d') as CanvasRenderingContext2D;
+      this.width = this.canvas.width;
+      this.height = this.canvas.height;
+      this.cx = this.width / 2;
+      this.cy = this.height / 2;
+      this.R = (this.height / 2) * 0.85;
+
+      this.nodes = {};
+      this.setupNodes();
+
+      this.isDrawing = false;
+      this.drawnPath = [];
+      this.currentMousePos = null;
+      this.hoveredNode = null;
+
+      this.colors = {
+        bgHex: 'rgba(0, 30, 60, 0.8)',
+        hexBorder: 'rgba(0, 100, 200, 0.5)',
+        nodeDefault: 'rgba(255, 255, 255, 0.3)',
+        nodeActive: '#43e061',
+        line: '#43e061',
+        lineGlow: 'rgba(67, 224, 97, 0.6)'
+      };
+
+      this.bindEvents();
+      this.draw();
+    }
+
+    setupNodes() {
+      const glyphK = 0.38;
+      const glyphK1 = glyphK * 2;
+      const glyphK2 = glyphK;
+
+      this.nodes = {
+        m: { dx: 0, dy: -this.R * glyphK1, x: 0, y: 0 },
+        d: { dx: Math.cos(Math.PI / 6) * this.R * glyphK1, dy: -Math.sin(Math.PI / 6) * this.R * glyphK1, x: 0, y: 0 },
+        k: { dx: Math.cos(Math.PI / 6) * this.R * glyphK1, dy: Math.sin(Math.PI / 6) * this.R * glyphK1, x: 0, y: 0 },
+        c: { dx: 0, dy: this.R * glyphK1, x: 0, y: 0 },
+        l: { dx: -Math.cos(Math.PI / 6) * this.R * glyphK1, dy: Math.sin(Math.PI / 6) * this.R * glyphK1, x: 0, y: 0 },
+        b: { dx: -Math.cos(Math.PI / 6) * this.R * glyphK1, dy: -Math.sin(Math.PI / 6) * this.R * glyphK1, x: 0, y: 0 },
+
+        r: { dx: Math.cos(Math.PI / 6) * this.R * glyphK2, dy: -Math.sin(Math.PI / 6) * this.R * glyphK2, x: 0, y: 0 },
+        j: { dx: Math.cos(Math.PI / 6) * this.R * glyphK2, dy: Math.sin(Math.PI / 6) * this.R * glyphK2, x: 0, y: 0 },
+        h: { dx: -Math.cos(Math.PI / 6) * this.R * glyphK2, dy: Math.sin(Math.PI / 6) * this.R * glyphK2, x: 0, y: 0 },
+        t: { dx: -Math.cos(Math.PI / 6) * this.R * glyphK2, dy: -Math.sin(Math.PI / 6) * this.R * glyphK2, x: 0, y: 0 },
+        a: { dx: 0, dy: 0, x: 0, y: 0 }
+      };
+
+      for (const key in this.nodes) {
+        this.nodes[key].x = this.cx + this.nodes[key].dx;
+        this.nodes[key].y = this.cy + this.nodes[key].dy;
+      }
+    }
+
+    bindEvents() {
+      const getPos = (e: MouseEvent | TouchEvent) => {
+        const rect = this.canvas.getBoundingClientRect();
+        const clientX = 'touches' in e ? e.touches[0].clientX : (e as MouseEvent).clientX;
+        const clientY = 'touches' in e ? e.touches[0].clientY : (e as MouseEvent).clientY;
+        return {
+          x: clientX - rect.left,
+          y: clientY - rect.top
+        };
+      };
+
+      const onStart = (e: MouseEvent | TouchEvent) => {
+        if (e.cancelable) e.preventDefault(); // Prevent scrolling on touch/mouse start
+        const pos = getPos(e);
+        this.isDrawing = true;
+        this.drawnPath = [];
+        this.currentMousePos = pos;
+        this.checkNodeCollision(pos);
+
+        const nameEl = document.getElementById('glyph-name-display');
+        const seqEl = document.getElementById('sequence-results');
+        if (nameEl) {
+          nameEl.textContent = 'Drawing...';
+          nameEl.className = 'glyph-name drawing';
+        }
+        if (seqEl) seqEl.innerHTML = '';
+
+        this.draw();
+      };
+
+      const onMove = (e: MouseEvent | TouchEvent) => {
+        if (!this.isDrawing) return;
+        if (e.cancelable) e.preventDefault(); // Crucial: prevent default to stop page scroll when drawing
+        const pos = getPos(e);
+        this.currentMousePos = pos;
+        this.checkNodeCollision(pos);
+        this.draw();
+      };
+
+      const onEnd = (e: MouseEvent | TouchEvent) => {
+        if (!this.isDrawing) return;
+        // e.preventDefault() on end is less critical for scroll but good for consistency, though sometimes touchend isn't cancelable
+        if (e.cancelable) e.preventDefault();
+        this.isDrawing = false;
+        this.currentMousePos = null;
+        this.hoveredNode = null;
+        this.draw();
+
+        this.recognizeGlyph();
+      };
+
+      this.canvas.addEventListener('mousedown', onStart);
+      this.canvas.addEventListener('mousemove', onMove);
+      window.addEventListener('mouseup', onEnd);
+
+      this.canvas.addEventListener('touchstart', onStart, { passive: false });
+      this.canvas.addEventListener('touchmove', onMove, { passive: false });
+      window.addEventListener('touchend', onEnd);
+    }
+
+    checkNodeCollision(pos: {x: number, y: number}) {
+      const hitRadius = 20;
+      this.hoveredNode = null;
+
+      for (const [key, node] of Object.entries(this.nodes)) {
+        const dist = Math.hypot(node.x - pos.x, node.y - pos.y);
+        if (dist < hitRadius) {
+          this.hoveredNode = key;
+
+          if (this.isDrawing && (this.drawnPath.length === 0 || this.drawnPath[this.drawnPath.length - 1] !== key)) {
+            this.drawnPath.push(key);
+          }
+          break;
+        }
+      }
+    }
+
+    drawHexagon() {
+      const ctx = this.ctx;
+      ctx.beginPath();
+      for (let i = 0; i < 6; i++) {
+        const angle = (Math.PI / 3) * i - Math.PI / 2;
+        const x = this.cx + this.R * Math.cos(angle);
+        const y = this.cy + this.R * Math.sin(angle);
+        if (i === 0) ctx.moveTo(x, y);
+        else ctx.lineTo(x, y);
+      }
+      ctx.closePath();
+
+      ctx.fillStyle = this.colors.bgHex;
+      ctx.fill();
+
+      ctx.strokeStyle = this.colors.hexBorder;
+      ctx.lineWidth = 2;
+      ctx.stroke();
+    }
+
+    draw() {
+      const ctx = this.ctx;
+      ctx.clearRect(0, 0, this.width, this.height);
+
+      this.drawHexagon();
+
+      if (this.drawnPath.length > 0) {
+        ctx.beginPath();
+        ctx.moveTo(this.nodes[this.drawnPath[0]].x, this.nodes[this.drawnPath[0]].y);
+
+        for (let i = 1; i < this.drawnPath.length; i++) {
+          ctx.lineTo(this.nodes[this.drawnPath[i]].x, this.nodes[this.drawnPath[i]].y);
+        }
+
+        if (this.isDrawing && this.currentMousePos) {
+          ctx.lineTo(this.currentMousePos.x, this.currentMousePos.y);
+        }
+
+        ctx.strokeStyle = this.colors.line;
+        ctx.lineWidth = 4;
+        ctx.lineCap = 'round';
+        ctx.lineJoin = 'round';
+
+        ctx.shadowColor = this.colors.lineGlow;
+        ctx.shadowBlur = 10;
+        ctx.stroke();
+
+        ctx.shadowBlur = 0;
+      }
+
+      for (const [key, node] of Object.entries(this.nodes)) {
+        ctx.beginPath();
+
+        const isActive = this.drawnPath.includes(key);
+        const isHovered = this.hoveredNode === key;
+
+        let radius = 4;
+        if (isActive) {
+          ctx.fillStyle = this.colors.nodeActive;
+          radius = 6;
+          ctx.shadowColor = this.colors.lineGlow;
+          ctx.shadowBlur = 8;
+        } else if (isHovered) {
+          ctx.fillStyle = this.colors.nodeActive;
+          radius = 5;
+        } else {
+          ctx.fillStyle = this.colors.nodeDefault;
+        }
+
+        ctx.arc(node.x, node.y, radius, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.shadowBlur = 0;
+      }
+    }
+
+    getSegmentsFromPath(path: string[]) {
+      const segments = new Set<string>();
+      for (let i = 0; i < path.length - 1; i++) {
+        const p1 = path[i];
+        const p2 = path[i + 1];
+        segments.add(p1 < p2 ? p1 + p2 : p2 + p1);
+      }
+      return Array.from(segments).sort();
+    }
+
+    recognizeGlyph() {
+      const nameEl = document.getElementById('glyph-name-display');
+      if (this.drawnPath.length < 2) {
+        if (nameEl) {
+          nameEl.textContent = 'Draw a Glyph';
+          nameEl.className = 'glyph-name';
+        }
+        return;
+      }
+
+    const userSegments = this.getSegmentsFromPath(this.drawnPath);
+
+    // We explicitly type any as we append _segments to it
+    glyphsData.forEach((g: any) => {
+      if (!g._segments) {
+        const path = g.points.split('');
+        const segments = new Set<string>();
+        for (let i = 0; i < path.length - 1; i++) {
+          const p1 = path[i];
+          const p2 = path[i + 1];
+          segments.add(p1 < p2 ? p1 + p2 : p2 + p1);
+        }
+        g._segments = Array.from(segments).sort();
+      }
+    });
+
+      let bestMatch: any = null;
+      let highestScore = -1;
+
+      for (const glyph of glyphsData as any[]) {
+        const gSegments = glyph._segments;
+
+        if (userSegments.length === gSegments.length &&
+            userSegments.every((seg, i) => seg === gSegments[i])) {
+          bestMatch = glyph;
+          highestScore = 1;
+          break;
+        }
+
+        let matches = 0;
+        userSegments.forEach(seg => {
+          if (gSegments.includes(seg)) matches++;
+        });
+
+        const score = (matches / gSegments.length) - ((userSegments.length - matches) * 0.5);
+
+        if (score > highestScore && score > 0.5) {
+          highestScore = score;
+          bestMatch = glyph;
+        }
+      }
+
+      this.displayResults(bestMatch);
+    }
+
+    displayResults(glyph: any) {
+      const nameEl = document.getElementById('glyph-name-display');
+      const seqEl = document.getElementById('sequence-results');
+
+      if (!nameEl || !seqEl) return;
+
+      if (!glyph) {
+        nameEl.textContent = 'Unknown Glyph';
+        nameEl.className = 'glyph-name unknown';
+        seqEl.innerHTML = '<p class="no-results">No sequences found.</p>';
+        return;
+      }
+
+      const primaryName = glyph.name[0];
+      nameEl.textContent = glyph.name.join(' / ');
+      nameEl.className = 'glyph-name matched';
+
+      const matchedSequences = (sequencesData as string[][]).filter(seq =>
+        glyph.name.includes(seq[0])
+      );
+
+      if (matchedSequences.length === 0) {
+        seqEl.innerHTML = '<p class="no-results">No sequences start with this glyph.</p>';
+        return;
+      }
+
+      // Generate SVG for a glyph based on its points
+      const generateGlyphSvg = (glyphName: string) => {
+        // Find the glyph data
+        const gData = (glyphsData as any[]).find(g => g.name.includes(glyphName));
+        if (!gData) return '';
+
+        const points = gData.points;
+        if (!points || points.length < 2) return '';
+
+        // Standard 11 points for drawing thumbnail
+        // Using a 100x100 viewBox
+        const r = 40;
+        const cx = 50;
+        const cy = 50;
+        const glyphK = 0.38;
+        const k1 = glyphK * 2;
+        const k2 = glyphK;
+
+        const thumbNodes: Record<string, {x: number, y: number}> = {
+          m: { x: cx, y: cy - r * k1 },
+          d: { x: cx + Math.cos(Math.PI / 6) * r * k1, y: cy - Math.sin(Math.PI / 6) * r * k1 },
+          k: { x: cx + Math.cos(Math.PI / 6) * r * k1, y: cy + Math.sin(Math.PI / 6) * r * k1 },
+          c: { x: cx, y: cy + r * k1 },
+          l: { x: cx - Math.cos(Math.PI / 6) * r * k1, y: cy + Math.sin(Math.PI / 6) * r * k1 },
+          b: { x: cx - Math.cos(Math.PI / 6) * r * k1, y: cy - Math.sin(Math.PI / 6) * r * k1 },
+          r: { x: cx + Math.cos(Math.PI / 6) * r * k2, y: cy - Math.sin(Math.PI / 6) * r * k2 },
+          j: { x: cx + Math.cos(Math.PI / 6) * r * k2, y: cy + Math.sin(Math.PI / 6) * r * k2 },
+          h: { x: cx - Math.cos(Math.PI / 6) * r * k2, y: cy + Math.sin(Math.PI / 6) * r * k2 },
+          t: { x: cx - Math.cos(Math.PI / 6) * r * k2, y: cy - Math.sin(Math.PI / 6) * r * k2 },
+          a: { x: cx, y: cy }
+        };
+
+        let pathD = `M ${thumbNodes[points[0]].x} ${thumbNodes[points[0]].y}`;
+        for (let i = 1; i < points.length; i++) {
+          if(thumbNodes[points[i]]) {
+             pathD += ` L ${thumbNodes[points[i]].x} ${thumbNodes[points[i]].y}`;
+          }
+        }
+
+        // Draw background hexagon for thumbnail
+        let hexD = "";
+        for (let i = 0; i < 6; i++) {
+          const angle = (Math.PI / 3) * i - Math.PI / 2;
+          const x = cx + r * Math.cos(angle);
+          const y = cy + r * Math.sin(angle);
+          if (i === 0) hexD += `M ${x} ${y}`;
+          else hexD += ` L ${x} ${y}`;
+        }
+        hexD += " Z";
+
+        return `
+          <svg viewBox="0 0 100 100" class="glyph-thumb">
+            <path d="${hexD}" fill="rgba(0, 30, 60, 0.8)" stroke="rgba(0, 100, 200, 0.5)" stroke-width="2"/>
+            <path d="${pathD}" fill="none" stroke="#43e061" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        `;
+      };
+
+      let html = '<ul class="seq-list">';
+
+      matchedSequences.forEach(seq => {
+        html += `<li>
+          <div class="seq-items">
+            ${seq.map((name, i) => {
+              const svg = generateGlyphSvg(name);
+              return `
+                <div class="glyph-card">
+                  ${svg}
+                  <span class="seq-word ${i === 0 ? 'seq-highlight' : ''}">${name}</span>
+                </div>
+              `;
+            }).join('<span class="seq-separator">→</span>')}
+          </div>
+        </li>`;
+      });
+
+      html += '</ul>';
+      seqEl.innerHTML = html;
+    }
+  }
+
+  // Define custom element to wrap logic
+  class GlyphPadElement extends HTMLElement {
+    constructor() {
+      super();
+    }
+    connectedCallback() {
+      // Delay init slightly to ensure DOM is ready
+      setTimeout(() => {
+        new GlyphPad('glyph-canvas');
+      }, 0);
+    }
+  }
+
+  customElements.define('glyph-pad', GlyphPadElement);
+</script>
+
+<glyph-pad style="display: block;">
+  <!-- Inner content matches template above -->
+</glyph-pad>
+
+<style is:global>
+  .glyph-module-container {
+    margin: 2rem 0;
+    padding: 1.5rem;
+    background: var(--sl-color-bg-nav);
+    border: 1px solid var(--sl-color-gray-5);
+    border-radius: 8px;
+    font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .glyph-interactive-area {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    touch-action: none; /* Prevents touch scrolling specifically on the canvas container */
+  }
+
+  #glyph-canvas {
+    background: transparent; /* Changed from #050505 to match theme */
+    border-radius: 4px;
+    box-shadow: 0 0 10px rgba(67, 224, 97, 0.1);
+    cursor: crosshair;
+    touch-action: none;
+    border: 1px solid var(--sl-color-gray-5);
+  }
+
+  .glyph-result-panel {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .glyph-name {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--sl-color-gray-5);
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-align: center;
+    color: var(--sl-color-gray-3);
+    transition: color 0.3s ease;
+  }
+
+  .glyph-name.matched {
+    color: #43e061; /* Enlightened Green */
+    text-shadow: 0 0 10px rgba(67, 224, 97, 0.5);
+  }
+
+  .glyph-name.unknown {
+    color: var(--sl-color-text-accent);
+  }
+
+  .glyph-name.drawing {
+    color: var(--sl-color-text-accent);
+  }
+
+  .sequence-list {
+    max-height: 400px;
+    overflow-y: auto;
+    padding-right: 0.5rem;
+    scrollbar-width: thin;
+    scrollbar-color: #43e061 var(--sl-color-bg-nav);
+  }
+
+  .sequence-list::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .sequence-list::-webkit-scrollbar-track {
+    background: var(--sl-color-bg-nav);
+  }
+
+  .sequence-list::-webkit-scrollbar-thumb {
+    background-color: var(--sl-color-gray-5);
+    border-radius: 3px;
+  }
+
+  .seq-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .seq-list li {
+    padding: 0.75rem 0.5rem; /* Smaller padding */
+    background: var(--sl-color-bg);
+    border-radius: 6px;
+    border-left: 3px solid #43e061;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+
+  .seq-items {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start; /* Align from top so SVGs stay horizontally aligned */
+    justify-content: flex-start;
+    gap: 0.15rem;
+    width: 100%;
+  }
+
+  .glyph-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start; /* Keep contents aligned to top */
+    gap: 0.15rem;
+    padding: 0;
+    background: transparent;
+    border-radius: 4px;
+    border: none;
+    width: 42px;
+    flex-shrink: 0;
+  }
+
+  .glyph-thumb {
+    width: 36px; /* Further reduced from 48px */
+    height: 36px;
+    background: transparent;
+    border-radius: 2px;
+  }
+
+  .seq-word {
+    font-size: 0.65rem; /* Even smaller text */
+    color: var(--sl-color-text);
+    text-transform: uppercase;
+    font-weight: 500;
+    text-align: center;
+    line-height: 1;
+    word-break: break-all; /* Break long words aggressively */
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* Max 2 lines for the word */
+    -webkit-box-orient: vertical;
+  }
+
+  .seq-highlight {
+    color: #43e061;
+    font-weight: bold;
+    text-shadow: 0 0 5px rgba(67, 224, 97, 0.2);
+  }
+
+  .seq-separator {
+    color: var(--sl-color-gray-3);
+    font-size: 0.8rem;
+    margin: 0 0.05rem;
+    display: flex;
+    align-items: flex-start; /* Align arrow to the top */
+    padding-top: 10px; /* Push arrow down to align with the SVG centers (approx half of 36px) */
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .no-results {
+    color: var(--sl-color-gray-3);
+    font-style: italic;
+    text-align: center;
+    margin-top: 2rem;
+  }
+</style>
