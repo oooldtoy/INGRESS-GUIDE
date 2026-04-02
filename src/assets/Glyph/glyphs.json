@@ -1,546 +1,857 @@
 [
 	{
-		"name": ["Abandon"],
+		"name": [
+			"Abandon"
+		],
 		"points": "drahlc"
 	},
 	{
-		"name": ["Accept", "Open"],
+		"name": [
+			"Accept",
+			"Open"
+		],
 		"points": "hjch"
 	},
 	{
-		"name": ["Adapt"],
+		"name": [
+			"Adapt"
+		],
 		"points": "bhaj"
 	},
 	{
-		"name": ["Advance"],
+		"name": [
+			"Advance"
+		],
 		"points": "mtl"
 	},
 	{
-		"name": ["After"],
+		"name": [
+			"After"
+		],
 		"points": "drajkd"
 	},
 	{
-		"name": ["Again", "Repeat"],
+		"name": [
+			"Again",
+			"Repeat"
+		],
 		"points": "ltharj"
 	},
 	{
-		"name": ["All"],
+		"name": [
+			"All"
+		],
 		"points": "mblckdm"
 	},
 	{
-		"name": ["Answer"],
+		"name": [
+			"Answer"
+		],
 		"points": "trja"
 	},
 	{
-		"name": ["Attack", "War"],
+		"name": [
+			"Attack",
+			"War"
+		],
 		"points": "ltmrk"
 	},
 	{
-		"name": ["Avoid"],
+		"name": [
+			"Avoid"
+		],
 		"points": "bmrdj"
 	},
 	{
-		"name": ["Balance", "Perfection"],
+		"name": [
+			"Balance",
+			"Perfection"
+		],
 		"points": "mahlckja"
 	},
 	{
-		"name": ["Barrier"],
+		"name": [
+			"Barrier"
+		],
 		"points": "majk"
 	},
 	{
-		"name": ["Before"],
+		"name": [
+			"Before"
+		],
 		"points": "btahlb"
 	},
 	{
-		"name": ["Begin"],
+		"name": [
+			"Begin"
+		],
 		"points": "mhcj"
 	},
 	{
-		"name": ["Being", "Human"],
+		"name": [
+			"Being",
+			"Human"
+		],
 		"points": "trjcht"
 	},
 	{
-		"name": ["Body"],
+		"name": [
+			"Body"
+		],
 		"points": "trat"
 	},
 	{
-		"name": ["Breathe", "Live"],
+		"name": [
+			"Breathe",
+			"Live"
+		],
 		"points": "btard"
 	},
 	{
-		"name": ["Capture"],
+		"name": [
+			"Capture"
+		],
 		"points": "djahlc"
 	},
 	{
-		"name": ["Change"],
+		"name": [
+			"Change"
+		],
 		"points": "hacj"
 	},
 	{
-		"name": ["Chaos"],
-		"points": "chadmbl"
+		"name": [
+			"Chaos"
+		],
+		"points": "chardmbl"
 	},
 	{
-		"name": ["Civilization"],
+		"name": [
+			"Civilization"
+		],
 		"points": "bthjrd"
 	},
 	{
-		"name": ["Clear"],
+		"name": [
+			"Clear"
+		],
 		"points": "mac"
 	},
 	{
-		"name": ["Clear All"],
+		"name": [
+			"Clear All"
+		],
 		"points": "mackdmblc"
 	},
 	{
-		"name": ["Collective", "Shapers"],
+		"name": [
+			"Collective",
+			"Shapers"
+		],
 		"points": "lhtmrjk"
 	},
 	{
-		"name": ["Complex"],
+		"name": [
+			"Complex"
+		],
 		"points": "rtah"
 	},
 	{
-		"name": ["Conflict"],
+		"name": [
+			"Conflict"
+		],
 		"points": "lthjrk"
 	},
 	{
-		"name": ["Consequence"],
+		"name": [
+			"Consequence"
+		],
 		"points": "bthjk"
 	},
 	{
-		"name": ["Contemplate"],
+		"name": [
+			"Contemplate"
+		],
 		"points": "rathckdm"
 	},
 	{
-		"name": ["Courage"],
+		"name": [
+			"Courage"
+		],
 		"points": "lthj"
 	},
 	{
-		"name": ["Create"],
+		"name": [
+			"Create"
+		],
 		"points": "lhard"
 	},
 	{
-		"name": ["Creativity", "Idea", "Thought"],
+		"name": [
+			"Creativity",
+			"Idea",
+			"Thought"
+		],
 		"points": "hlbtajkdr"
 	},
 	{
-		"name": ["Danger"],
+		"name": [
+			"Danger"
+		],
 		"points": "catm"
 	},
 	{
-		"name": ["Data"],
+		"name": [
+			"Data"
+		],
 		"points": "mrahc"
 	},
 	{
-		"name": ["Defend"],
-		"points": "bhcjd"
-	},
-	{
-		"name": ["Destination"],
-		"points": "dkc"
-	},
-	{
-		"name": ["Destiny"],
-		"points": "tarjhc"
-	},
-	{
-		"name": ["Destroy"],
-		"points": "btajk"
-	},
-	{
-		"name": ["Deteriorate"],
-		"points": "tahl"
-	},
-	{
-		"name": ["Death", "Die"],
+		"name": [
+			"Death",
+			"Die"
+		],
 		"points": "lhajk"
 	},
 	{
-		"name": ["Difficult"],
+		"name": [
+			"Defend"
+		],
+		"points": "bhcjd"
+	},
+	{
+		"name": [
+			"Destination"
+		],
+		"points": "dkc"
+	},
+	{
+		"name": [
+			"Destiny"
+		],
+		"points": "tarjhc"
+	},
+	{
+		"name": [
+			"Destroy"
+		],
+		"points": "btajk"
+	},
+	{
+		"name": [
+			"Deteriorate"
+		],
+		"points": "tahl"
+	},
+	{
+		"name": [
+			"Difficult"
+		],
 		"points": "drjah"
 	},
 	{
-		"name": ["Discover"],
+		"name": [
+			"Discover"
+		],
 		"points": "lckd"
 	},
 	{
-		"name": ["Distance", "Outside"],
+		"name": [
+			"Distance",
+			"Outside"
+		],
 		"points": "lbm"
 	},
 	{
-		"name": ["Easy"],
+		"name": [
+			"Easy"
+		],
 		"points": "rahc"
 	},
 	{
-		"name": ["End"],
+		"name": [
+			"End"
+		],
 		"points": "macjdm"
 	},
 	{
-		"name": ["Enlightened", "Enlightenment"],
+		"name": [
+			"Enlightened",
+			"Enlightenment"
+		],
 		"points": "tratmdkc"
 	},
 	{
-		"name": ["Equal"],
+		"name": [
+			"Equal"
+		],
 		"points": "htrj"
 	},
 	{
-		"name": ["Escape"],
+		"name": [
+			"Escape"
+		],
 		"points": "htrdm"
 	},
 	{
-		"name": ["Evolution", "Progress", "Success"],
+		"name": [
+			"Evolution",
+			"Progress",
+			"Success"
+		],
 		"points": "math"
 	},
 	{
-		"name": ["Failure"],
+		"name": [
+			"Failure"
+		],
 		"points": "marj"
 	},
 	{
-		"name": ["Fear"],
+		"name": [
+			"Fear"
+		],
 		"points": "trjd"
 	},
 	{
-		"name": ["Field"],
+		"name": [
+			"Field"
+		],
 		"points": "bdjchb"
 	},
 	{
-		"name": ["Follow"],
+		"name": [
+			"Follow"
+		],
 		"points": "mrdk"
 	},
 	{
-		"name": ["Forget"],
+		"name": [
+			"Forget"
+		],
 		"points": "hl"
 	},
 	{
-		"name": ["Future"],
+		"name": [
+			"Future"
+		],
 		"points": "drjk"
 	},
 	{
-		"name": ["Gain"],
+		"name": [
+			"Gain"
+		],
 		"points": "bh"
 	},
 	{
-		"name": ["Grow"],
+		"name": [
+			"Grow"
+		],
 		"points": "lth"
 	},
 	{
-		"name": ["Harm"],
+		"name": [
+			"Harm"
+		],
 		"points": "kjatmra"
 	},
 	{
-		"name": ["Harmony", "Peace"],
+		"name": [
+			"Harmony",
+			"Peace"
+		],
 		"points": "mtajcharm"
 	},
 	{
-		"name": ["Have"],
+		"name": [
+			"Have"
+		],
 		"points": "jahc"
 	},
 	{
-		"name": ["Help"],
+		"name": [
+			"Help"
+		],
 		"points": "btahj"
 	},
 	{
-		"name": ["Hide"],
+		"name": [
+			"Hide"
+		],
 		"points": "trdjh"
 	},
 	{
-		"name": ["I", "Me"],
+		"name": [
+			"I",
+			"Me"
+		],
 		"points": "trct"
 	},
 	{
-		"name": ["Ignore"],
+		"name": [
+			"Ignore"
+		],
 		"points": "jk"
 	},
 	{
-		"name": ["Imperfect"],
+		"name": [
+			"Imperfect"
+		],
 		"points": "atharh"
 	},
 	{
-		"name": ["Improve"],
+		"name": [
+			"Improve"
+		],
 		"points": "draj"
 	},
 	{
-		"name": ["Impure"],
+		"name": [
+			"Impure"
+		],
 		"points": "catha"
 	},
 	{
-		"name": ["Individual", "Self"],
+		"name": [
+			"Individual",
+			"Self"
+		],
 		"points": "lck"
 	},
 	{
-		"name": ["Inside", "Not"],
+		"name": [
+			"Inside",
+			"Not"
+		],
 		"points": "trj"
 	},
 	{
-		"name": ["Intelligence"],
+		"name": [
+			"Intelligence"
+		],
 		"points": "lhtard"
 	},
 	{
-		"name": ["Interrupt"],
+		"name": [
+			"Interrupt"
+		],
 		"points": "matblhac"
 	},
 	{
-		"name": ["Journey"],
+		"name": [
+			"Journey"
+		],
 		"points": "dratblc"
 	},
 	{
-		"name": ["Key"],
+		"name": [
+			"Key"
+		],
 		"points": "catharja"
 	},
 	{
-		"name": ["Knowledge"],
+		"name": [
+			"Knowledge"
+		],
 		"points": "tarct"
 	},
 	{
-		"name": ["Lead"],
+		"name": [
+			"Lead"
+		],
 		"points": "mblhc"
 	},
 	{
-		"name": ["Legacy"],
+		"name": [
+			"Legacy"
+		],
 		"points": "lhtbmdrjk"
 	},
 	{
-		"name": ["Less"],
+		"name": [
+			"Less"
+		],
 		"points": "tar"
 	},
 	{
-		"name": ["Liberate"],
+		"name": [
+			"Liberate"
+		],
 		"points": "ltardm"
 	},
 	{
-		"name": ["Lie"],
+		"name": [
+			"Lie"
+		],
 		"points": "htajra"
 	},
 	{
-		"name": ["Link"],
+		"name": [
+			"Link"
+		],
 		"points": "bd"
 	},
 	{
-		"name": ["Live Again", "Reincarnate"],
+		"name": [
+			"Live Again",
+			"Reincarnate"
+		],
 		"points": "lthard"
 	},
 	{
-		"name": ["Lose"],
+		"name": [
+			"Lose"
+		],
 		"points": "dj"
 	},
 	{
-		"name": ["Message"],
+		"name": [
+			"Message"
+		],
 		"points": "djatl"
 	},
 	{
-		"name": ["Mind"],
+		"name": [
+			"Mind"
+		],
 		"points": "tacht"
 	},
 	{
-		"name": ["More"],
+		"name": [
+			"More"
+		],
 		"points": "haj"
 	},
 	{
-		"name": ["Mystery"],
+		"name": [
+			"Mystery"
+		],
 		"points": "htrmtb"
 	},
 	{
-		"name": ["Nature"],
-		"points": "lhtrjk"
-	},
-	{
-		"name": ["New"],
-		"points": "rjk"
-	},
-	{
-		"name": ["N'Zeer"],
+		"name": [
+			"N'Zeer"
+		],
 		"points": "camtarm"
 	},
 	{
-		"name": ["Nemesis"],
+		"name": [
+			"Nature"
+		],
+		"points": "lhtrjk"
+	},
+	{
+		"name": [
+			"Nemesis"
+		],
 		"points": "bdrahlkjatb"
 	},
 	{
-		"name": ["Nourish"],
+		"name": [
+			"New"
+		],
+		"points": "rjk"
+	},
+	{
+		"name": [
+			"Nourish"
+		],
 		"points": "ahlca"
 	},
 	{
-		"name": ["Now", "Present"],
+		"name": [
+			"Now",
+			"Present"
+		],
 		"points": "thjr"
 	},
 	{
-		"name": ["Old"],
+		"name": [
+			"Old"
+		],
 		"points": "bth"
 	},
 	{
-		"name": ["Open All"],
+		"name": [
+			"Open All",
+			"Openall"
+		],
 		"points": "chjckdmblc"
 	},
 	{
-		"name": ["Osiris"],
+		"name": [
+			"Open All",
+			"Openall"
+		],
+		"points": "chjckdmblc"
+	},
+	{
+		"name": [
+			"Osiris"
+		],
 		"points": "tratmrklt"
 	},
 	{
-		"name": ["Past"],
+		"name": [
+			"Past"
+		],
 		"points": "bthl"
 	},
 	{
-		"name": ["Path"],
+		"name": [
+			"Path"
+		],
 		"points": "mahl"
 	},
 	{
-		"name": ["Perspective"],
+		"name": [
+			"Perspective"
+		],
 		"points": "lharmtajk"
 	},
 	{
-		"name": ["Portal"],
+		"name": [
+			"Portal"
+		],
 		"points": "btrdkjhlb"
 	},
 	{
-		"name": ["Potential"],
+		"name": [
+			"Potential"
+		],
 		"points": "majkd"
 	},
 	{
-		"name": ["Presence"],
+		"name": [
+			"Presence"
+		],
 		"points": "htarjhcj"
 	},
 	{
-		"name": ["Pure"],
+		"name": [
+			"Pure"
+		],
 		"points": "majra"
 	},
 	{
-		"name": ["Pursue"],
+		"name": [
+			"Pursue"
+		],
 		"points": "btmr"
 	},
 	{
-		"name": ["Question"],
+		"name": [
+			"Question"
+		],
 		"points": "htrm"
 	},
 	{
-		"name": ["React"],
+		"name": [
+			"React"
+		],
 		"points": "rtajk"
 	},
 	{
-		"name": ["Rebel"],
+		"name": [
+			"Rebel"
+		],
 		"points": "bhardk"
 	},
 	{
-		"name": ["Recharge", "Repair"],
+		"name": [
+			"Recharge",
+			"Repair"
+		],
 		"points": "mbtam"
 	},
 	{
-		"name": ["Refresh"],
+		"name": [
+			"Refresh"
+		],
 		"points": "lbtajkdrahl"
 	},
 	{
-		"name": ["Resistance", "Struggle"],
+		"name": [
+			"Resistance",
+			"Struggle"
+		],
 		"points": "hcamtr"
 	},
 	{
-		"name": ["Restraint"],
+		"name": [
+			"Restraint"
+		],
 		"points": "btajkc"
 	},
 	{
-		"name": ["Retreat"],
+		"name": [
+			"Retreat"
+		],
 		"points": "mrk"
 	},
 	{
-		"name": ["Safety"],
+		"name": [
+			"Safety"
+		],
 		"points": "ltrk"
 	},
 	{
-		"name": ["Save"],
+		"name": [
+			"Save"
+		],
 		"points": "hajd"
 	},
 	{
-		"name": ["Search"],
+		"name": [
+			"Search"
+		],
 		"points": "arthj"
 	},
 	{
-		"name": ["See"],
+		"name": [
+			"See"
+		],
 		"points": "mt"
 	},
 	{
-		"name": ["Separate"],
+		"name": [
+			"Separate"
+		],
 		"points": "btharjk"
 	},
 	{
-		"name": ["Share"],
+		"name": [
+			"Share"
+		],
 		"points": "kjhlc"
 	},
 	{
-		"name": ["Shield"],
+		"name": [
+			"Shield"
+		],
 		"points": "mthcjrm"
 	},
 	{
-		"name": ["Simple"],
+		"name": [
+			"Simple"
+		],
 		"points": "hj"
 	},
 	{
-		"name": ["Soul"],
+		"name": [
+			"Soul"
+		],
 		"points": "racjr"
 	},
 	{
-		"name": ["Speed"],
+		"name": [
+			"Speed"
+		],
 		"points": "rmtajch"
 	},
 	{
-		"name": ["Stability", "Stay"],
+		"name": [
+			"Stability",
+			"Stay"
+		],
 		"points": "lhjk"
 	},
 	{
-		"name": ["Star"],
+		"name": [
+			"Star"
+		],
 		"points": "macatbtajkjardrahlha"
 	},
 	{
-		"name": ["Strong"],
+		"name": [
+			"Strong"
+		],
 		"points": "thjrt"
 	},
 	{
-		"name": ["Technology"],
+		"name": [
+			"Technology"
+		],
 		"points": "drahtajk"
 	},
 	{
-		"name": ["Them"],
+		"name": [
+			"Them"
+		],
 		"points": "mhj"
 	},
 	{
-		"name": ["Together"],
+		"name": [
+			"Toast"
+		],
+		"points": "bdrkltb"
+	},
+	{
+		"name": [
+			"Together"
+		],
 		"points": "lharta"
 	},
 	{
-		"name": ["Truth"],
+		"name": [
+			"Truth"
+		],
 		"points": "htajrah"
 	},
 	{
-		"name": ["Unbounded"],
+		"name": [
+			"Unbounded"
+		],
 		"points": "arthjdmblck"
 	},
 	{
-		"name": ["Us", "We"],
+		"name": [
+			"Us",
+			"We"
+		],
 		"points": "trc"
 	},
 	{
-		"name": ["Use"],
+		"name": [
+			"Use"
+		],
 		"points": "ajd"
 	},
 	{
-		"name": ["Victory"],
+		"name": [
+			"Victory"
+		],
 		"points": "mtcrm"
 	},
 	{
-		"name": ["Want"],
+		"name": [
+			"Want"
+		],
 		"points": "lhcj"
 	},
 	{
-		"name": ["Weak"],
+		"name": [
+			"Weak"
+		],
 		"points": "btrj"
 	},
 	{
-		"name": ["Worth"],
+		"name": [
+			"Worth"
+		],
 		"points": "bhajd"
 	},
 	{
-		"name": ["XM"],
+		"name": [
+			"XM"
+		],
 		"points": "ahtrja"
 	},
 	{
-		"name": ["You", "Your"],
+		"name": [
+			"You",
+			"Your"
+		],
 		"points": "mhjm"
 	}
 ]

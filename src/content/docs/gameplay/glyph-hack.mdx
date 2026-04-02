@@ -1,22 +1,169 @@
 ---
 title: Glyph Hack/画图Hack
-description: 玩法介绍介绍
 ---
 
 import GlyphPad from '../../../components/GlyphPad.astro';
 
-## 什么是 Glyph Hack？
+### 什么是 Glyph Hack？
 
-Glyph Hack（画图Hack）是在 Portal 界面上按住“HACK”按钮左滑触发的一个小游戏。通过在倒计时内按顺序正确画出所有出现的图形符号（Glyph），玩家可以获得更多物资和额外 AP 奖励。
+Glyph Hack（画图Hack）是在 Portal 界面上按住“HACK”按钮左滑触发的一个记忆小游戏。通过在倒计时内按顺序正确画出所有出现的图形符号（Glyph）且每个图形都需要一笔画完，完成后玩家可以获得更多物资和额外 AP 奖励。
 
-你可以使用下方的画板熟悉 Glyph 符号。在图形上用鼠标拖拽绘制Glyph，它会显示出该Glyph的名字，并列出所有以它开头的画图序列（Sequence）。
+Hack等级（即玩家等级与Portal等级中的较小值）不同时，画图小游戏一开始会显示的图形数量和最后完成游戏的时限不同，具体见下表：
+
+<div style="display: flex; justify-content: center; width: 100%;">
+
+| Hack等级 | Glyph数量 | 完成时限  |
+| ---- | ---- | ---- |
+| L1 | 1 | 20s |
+| L2 | 2 | 20s |
+| L3 | 3 | 20s |
+| L4 | 3 | 19s |
+| L5 | 3 | 18s |
+| L6 | 4 | 17s |
+| L7 | 4 | 16s |
+| L8 | 5 | 15s |
+
+</div>
+
+你可以使用下方的画板画出熟悉 Glyph 符号。如果这是一个存在的Glyph，它会显示出该Glyph的名字，并列出所有以它开头的画图序列（Sequence）。
 
 <GlyphPad />
 
-底下暂时是一些占位符
-1
-1
-1
-1
-1
-1
+### Glyph命令
+
+在Glyph小游戏开始之前的一段时间内，玩家可以通过输入一些命令来改变这次Hack的产出或画图小游戏速度。
+
+目前一共有五个有效的Glyph命令：
+
+<div style="display: flex; flex-direction: column; gap: 2rem;">
+
+<div>
+  <div style="display: flex; align-items: center; gap: 1rem;">
+    <div style="flex-shrink: 0;">
+      <svg viewBox="0 0 100 100" width="120" height="120">
+        <path d="M 50 10 L 84.64 30 L 84.64 70 L 50 90 L 15.36 70 L 15.36 30 Z" fill="rgba(0, 30, 60, 0.8)" stroke="rgba(0, 100, 200, 0.5)" stroke-width="2"/>
+        <path d="M 36.84 57.6 L 50 50 L 63.16 57.6" fill="none" stroke="#43e061" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+    <div>
+      <h4 style="margin-top: 0;">MORE</h4>
+      <p>MORE 指令会导致该次 Glyph Hack 即使在 Inventory 里有 Portal Key 的情况下也有一定概率出 Key，并且可能一次产出多把 Key（最多 3 把）。</p>
+    </div>
+  </div>
+</div>
+
+<div>
+  <div style="display: flex; align-items: center; gap: 1rem;">
+    <div style="flex-shrink: 0;">
+      <svg viewBox="0 0 100 100" width="120" height="120">
+        <path d="M 50 10 L 84.64 30 L 84.64 70 L 50 90 L 15.36 70 L 15.36 30 Z" fill="rgba(0, 30, 60, 0.8)" stroke="rgba(0, 100, 200, 0.5)" stroke-width="2"/>
+        <path d="M 36.84 42.4 L 50 50 L 63.16 42.4" fill="none" stroke="#43e061" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+    <div>
+      <h4 style="margin-top: 0;">LESS</h4>
+      <p>LESS 指令会导致这次 Hack 完全不产出 Portal Key。</p>
+    </div>
+  </div>
+</div>
+
+<div>
+  <div style="display: flex; align-items: center; gap: 1rem;">
+    <div style="flex-shrink: 0;">
+      <svg viewBox="0 0 100 100" width="120" height="120">
+        <path d="M 50 10 L 84.64 30 L 84.64 70 L 50 90 L 15.36 70 L 15.36 30 Z" fill="rgba(0, 30, 60, 0.8)" stroke="rgba(0, 100, 200, 0.5)" stroke-width="2"/>
+        <path d="M 36.84 57.6 L 63.16 57.6" fill="none" stroke="#43e061" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+    <div>
+      <h4 style="margin-top: 0;">SIMPLE</h4>
+      <p>SIMPLE 指令会让一开始出现的图形符号展示速度降低，方便看清每个符号。</p>
+    </div>
+  </div>
+</div>
+
+<div>
+  <div style="display: flex; align-items: center; gap: 1rem;">
+    <div style="flex-shrink: 0;">
+      <svg viewBox="0 0 100 100" width="120" height="120">
+        <path d="M 50 10 L 84.64 30 L 84.64 70 L 50 90 L 15.36 70 L 15.36 30 Z" fill="rgba(0, 30, 60, 0.8)" stroke="rgba(0, 100, 200, 0.5)" stroke-width="2"/>
+        <path d="M 63.16 42.4 L 36.84 42.4 L 50 50 L 36.84 57.6" fill="none" stroke="#43e061" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+    <div>
+      <h4 style="margin-top: 0;">COMPLEX</h4>
+      <p>COMPLEX 指令会让一开始出现的图形符号展示速度提高，节约时间。</p>
+    </div>
+  </div>
+</div>
+
+<div>
+  <div style="display: flex; align-items: center; gap: 1rem;">
+    <div style="flex-shrink: 0;">
+      <svg viewBox="0 0 100 100" width="120" height="120">
+        <path d="M 50 10 L 84.64 30 L 84.64 70 L 50 90 L 15.36 70 L 15.36 30 Z" fill="rgba(0, 30, 60, 0.8)" stroke="rgba(0, 100, 200, 0.5)" stroke-width="2"/>
+        <path d="M 63.16 42.4 L 50 19.6 L 36.84 42.4 L 50 50 L 63.16 57.6 L 50 80.4 L 36.84 57.6" fill="none" stroke="#43e061" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+    <div>
+      <h4 style="margin-top: 0;">SPEED</h4>
+      <p>SPEED 指令会导致本次 Hack 产出只有 Portal Key，不产出 Key 的概率非常低。适合缺 Key 又不想拿多余物资的时候。</p>
+    </div>
+  </div>
+</div>
+
+</div>
+
+### 特殊的Glyph图形
+绝大部分的Glyph图形可以简单的一笔画完，但是以下图形略微特殊。
+
+> 提示：Glyph绘制的结果判定会无视回头路，如果你经过了所有应该经过的点、画出了所有应该画出的线，那即使你反复多连了几次，系统也不会判定错误。
+
+<div style="display: flex; flex-direction: column; gap: 2rem; margin-top: 1.5rem;">
+
+<div>
+  <div style="display: flex; align-items: center; gap: 1rem;">
+    <div style="flex-shrink: 0;">
+      <svg viewBox="0 0 100 100" width="120" height="120">
+        <path d="M 50 10 L 84.64 30 L 84.64 70 L 50 90 L 15.36 70 L 15.36 30 Z" fill="rgba(0, 30, 60, 0.8)" stroke="rgba(0, 100, 200, 0.5)" stroke-width="2"/>
+        <path d="M 50 50 L 36.84 42.4 L 36.84 57.6 L 50 50 L 63.16 42.4 L 36.84 57.6" fill="none" stroke="#43e061" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+    <div>
+      <h4 style="margin-top: 0;">IMPERFECT</h4>
+      <p>最后一笔不能经过中间点直接相连，需要绕开中心。</p>
+    </div>
+  </div>
+</div>
+
+<div>
+  <div style="display: flex; align-items: center; gap: 1rem;">
+    <div style="flex-shrink: 0;">
+      <svg viewBox="0 0 100 100" width="120" height="120">
+        <path d="M 50 10 L 84.64 30 L 84.64 70 L 50 90 L 15.36 70 L 15.36 30 Z" fill="rgba(0, 30, 60, 0.8)" stroke="rgba(0, 100, 200, 0.5)" stroke-width="2"/>
+        <path d="M 50 19.6 L 50 50 L 50 80.4 M 36.84 42.4 L 23.67 34.8 M 36.84 42.4 L 50 50 L 63.16 57.6 L 76.33 65.2 M 63.16 42.4 L 76.33 34.8 M 63.16 42.4 L 50 50 L 36.84 57.6 L 23.67 65.2 M 36.84 57.6 L 50 50" fill="none" stroke="#43e061" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+    <div>
+      <h4 style="margin-top: 0;">STAR</h4>
+      <p>无论从哪个边缘起点开始都可以完成绘制，它包含了连接到中心点的所有线段。</p>
+    </div>
+  </div>
+</div>
+
+<div>
+  <div style="display: flex; align-items: center; gap: 1rem;">
+    <div style="flex-shrink: 0;">
+      <svg viewBox="0 0 100 100" width="120" height="120">
+        <path d="M 50 10 L 84.64 30 L 84.64 70 L 50 90 L 15.36 70 L 15.36 30 Z" fill="rgba(0, 30, 60, 0.8)" stroke="rgba(0, 100, 200, 0.5)" stroke-width="2"/>
+        <path d="M 23.67 34.8 L 76.33 34.8 L 63.16 42.4 L 76.33 65.2 L 23.67 65.2 L 36.84 42.4 Z" fill="none" stroke="#43e061" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+    <div>
+      <h4 style="margin-top: 0;">TOAST</h4>
+      <p>一个隐藏的彩蛋图形。目前它不存在于任何 Glyph sequence 里，但在某些特殊活动时会成堆出现，替换原有序列里的Glyph。</p>
+    </div>
+  </div>
+</div>
+
+</div>
