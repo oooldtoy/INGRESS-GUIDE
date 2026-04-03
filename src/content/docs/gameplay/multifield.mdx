@@ -1,4 +1,113 @@
 ---
-title: 多重控制场
+title: Multifield/多重控制场
+lastUpdated: 2026-04-03
 ---
 
+import { Image } from 'astro:assets';
+import { Aside } from '@astrojs/starlight/components';
+import mf1Img from '../../../assets/mf1.png';
+import mf2Img from '../../../assets/mf2.png';
+import mf3Img from '../../../assets/mf3.png';
+import mf4Img from '../../../assets/mf4.png';
+import mf5Img from '../../../assets/mf5.png';
+
+多重控制场（Multifield / 简称多重）是 Ingress 中一项进阶的连线技巧。主要目的是利用有限数量的 Portal，通过特定的连线顺序与结构，制造出尽可能多的 [Control Field](/INGRESS-GUIDE/guides/controlfield/)。
+
+在游戏中，建立每一个 Control Field 都会给予固定的 1250 [AP](/INGRESS-GUIDE/data/accesspoint/) 奖励，由于一根 Link 最多可以同时建立两个 Field（左右各一个），通过多重技巧可以最大化 AP 收益，是玩家单人获取 AP 升级最快、最高效的方法之一；同时重叠的 Field 也能在一片区域获取更多的 MU 分数。
+
+### 多重的核心机制
+
+导致 Ingress 中存在多重玩法的根本机制在于：**在连线形成时，Link 的每一侧最多只会生成一个（且是最大的）Field**。
+
+通过下面两个例子（均为 4 个 Portal、5 条连线）的对比，我们可以直观理解机制：
+
+#### 错误示范
+
+<div class="not-content" style={{ display: 'flex', justifyContent: 'center', gap: '20px', alignItems: 'center', margin: '20px 0' }}>
+  <div><Image src={mf1Img} alt="错误的连线顺序" style={{ objectFit: 'contain', width: '386px', height: '260px', display: 'block' }} width={772} height={520} /></div>
+</div>
+
+如上图所示，如果你先搭出了同侧的两个三角形框架（<i>AD-DB</i>和<i>AB-BC</i>），然后再将A连接到B，虽然这根虚线**理论上**可以形成<i>ADB</i>和<i>ABC</i>两个三角形，但游戏机制判定此时在虚线上方仅会生成一个最大的三角形<i>ADB</i>而非两个。此时连线判定形成一个Field，获得1250+313 AP。
+
+#### 正确示范
+
+<div class="not-content" style={{ display: 'flex', justifyContent: 'center', gap: '20px', alignItems: 'center', margin: '20px 0' }}>
+  <div><Image src={mf2Img} alt="正确的连线顺序" style={{ objectFit: 'contain', width: '393px', height: '371px', display: 'block' }} width={786} height={742} /></div>
+</div>
+
+如上图，此时我们连接<i>AC</i>，形成的两个Field分别位于连线的两侧，判定为形成<i>ABC</i>和<i>ADC</i>两个Field，获得1250*2+313 AP。
+
+### 连线的基本规则与多重原理
+
+要进行多重，必须熟练掌握以下三条核心连线规则：
+
+1. **不能交叉**：任何新的 Link 都不能穿过已存在的 Link。
+2. **Field 内连线距离限制**：虽然现在的规则允许在建立好的 Field 内部向其顶点或内部其他点连线，但最大连线距离被限制为[不超过 2 公里](/INGRESS-GUIDE/guides/link/#link%E5%BB%BA%E7%AB%8B)。为了避免被这个限制卡住，最好的策略仍然是从外向内射入，或者从一开始就避免在 Field 内起手。
+3. **先封口，再连内点**：基于之前介绍的多重原则，总结出来的经验就是：到一个Portal以后，先从该点射出连接到顶点和最远可连接点，作出规划内可及的最大三角形（绿线），再从该点连接内点（红线）。
+
+<div class="not-content" style={{ display: 'flex', justifyContent: 'center', gap: '20px', alignItems: 'center', margin: '20px 0' }}>
+  <div><Image src={mf5Img} alt="示例" style={{ objectFit: 'contain', width: '393px', height: '371px', display: 'block' }} width={786} height={742} /></div>
+</div>
+
+因此，多重的核心原理就是**控制连线的先后顺序：先连可以连的最大Field**。
+
+当然，这个口诀并不是永远生效的。多重的情形十分复杂，封口与否通常会需要根据玩家实际行走路线来规划。如果你想做一个存在顶点（即多条射入线）的多重，先从以上方式做起是比较理想的。
+
+### 常见的多重流派与结构
+
+#### 1. 双顶点多重
+
+像鱼刺一样排列的结构。适合将一排呈直线分布的 Portal 全部 Field 起来。此方法仅要求两个端点的 Key 数量非常大，直线上的 Portal 不需要互相刷 Key；同时对直线上Portal的分布要求比较高。
+
+<div class="not-content" style={{ display: 'flex', justifyContent: 'center', gap: '20px', alignItems: 'center', margin: '20px 0' }}>
+  <div><Image src={mf3Img} alt="双端点多重示意图" style={{ objectFit: 'contain', width: '400px', height: '355px', display: 'block' }} width={1068} height={950} /></div>
+</div>
+
+**思路**：
+1. 首先将底边（两个 Anchor）互相连接。
+2. 沿着中轴线**由下向上**（由内向外）连接。
+3. **重点**：在到达一个新的顶点（如上图红点）时，必须**先向下连线完成封口**（连成大三角形），然后再向内部刚才经过的点连线。通过“先封大三角，再连内点”的顺序（结合由内及外的外围走位），才能最大化Field数量。
+
+#### 2. 单端点多重 (Single Anchor Pyramids / 扇形 / Fanfield)
+
+单端点多重容错率高，适合围绕着某个中心点展开，对Portal的分布没有要求。
+
+<div class="not-content" style={{ display: 'flex', justifyContent: 'center', gap: '20px', alignItems: 'center', margin: '20px 0' }}>
+  <div><Image src={mf4Img} alt="单端点多重示意图" style={{ objectFit: 'contain', width: '400px', height: '280px', display: 'block' }} width={1036} height={726} /></div>
+</div>
+
+**思路**：
+1. 所有的外围端点都必须先连接到中心锚点（图中的点 A）。
+2. 按照以A点为中心点的顺时针或逆时针方向，按照连至A点的线的相对位置顺序<sup>*</sup>，遍历所有连线的Portal：上图采用逆时针遍历，即路线为
+    `A→G→F→K→D→E→C→B→H`。
+3. 在每到达一个新的端点时，必须**先连绿线完成大三角形的封口**（绿线），**再连接内部多重**（红线）。
+
+><sup>*</sup> 例如：我们在上图中按逆时针遍历，AC在AE的逆时针方向，因此先前往E，再前往C
+#### 3. 完美多重
+
+指在给定一片区域的 Portal 集合中，计算并执行能压榨出**绝对最大数量** Control Field 的极限连法。这极易连错导致后继连线受阻，玩家通常会使用工具辅助。
+
+### 辅助规划工具
+
+如果你面对一片几十个 Portal 的公园不知从何下手，可以使用成熟的工具来帮你计算连线顺序。
+
+Fanfields 2是一个相当全能的单顶点多重计算器。你可以在[IITC](https://iitc.app/)(一个游戏网页地图美化模组)的官网上找到这个插件。以下简要介绍这个插件的用法：
+
+- 首先用 `Drawtools`的 `Polygon`方法圈出你需要作为顶点的Portal。
+- 用同样的方法圈出你需要作为端点的Portal，你可以使用多个Polygon分别圈出所有Portal来避免圈到你不想用的Portal。
+- 确认你的顶点（Anchor）是否位于整个选择Portal群的*外侧*。外侧的定义为：当你仅利用你圈出的Portal来画出一个可以覆盖所有你圈出的Portal的多边形时，你的顶点(Anchor)位于多边形的顶点上。
+- 如果满足上述条件，可直接跳至下一条。如果不满足，你需要在你的顶点（Anchor）上放置一个`Drawtools`的 `Marker`。
+- 缩放至能看到你圈出的所有Portal：打开图层中有关Fanfield的图层，即可看到生成的多重规划。
+
+接下来你可能还需要一些调整：
+
+- 通过工具栏上的 `Shift left`或 `Shift right`来将顶点调整至你需要的Anchor上。
+- 通过点按 `Clockwise` 来选择你的遍历方向。
+- 通过 `Manage order` 来精确调整你想遍历所有Portal的路线。如果不进行这个设定，插件会默认你按照上方的方式严格按照线段顺序遍历。
+- 最后，你可以通过 `Task List`来导出一份文字版方案。
+
+用插件规划多重也是相当复杂的事情，如果有问题，欢迎与社群内的玩家一同探讨。
+
+### 注意事项
+1. **Key 的储备**：多重规划最容易翻车的原因是**走到一半发现缺 Key**。在动手连线前，先花时间 Hack，对照规划表确保手里的 Key 数量和位置准确无误。
+2. **出射上限**：一个 Portal 最多只能向外射出 8 条 Link（不加 SoftBank Ultra Link 模组的情况下）。所以遇到中心点需要连出大量线的情况时，尽量在外围点向中心点射入（Inbound 数量无限制），这就要求你提前刷出大量中心点的 Key，带着去外围走。

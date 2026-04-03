@@ -1,3 +1,56 @@
 ---
-title: Mission/任务拼图
+title: Mission/任务
+lastUpdated: 2026-04-03
 ---
+
+import { Image } from 'astro:assets';
+import { Aside } from '@astrojs/starlight/components';
+import missionImg from '../../../assets/mission.png';
+import mission1Img from '../../../assets/mission1.png';
+import mission2Img from '../../../assets/mission2.png';
+import mission3Img from '../../../assets/mission3.png';
+
+Mission（任务）是一个相对独立的玩法。入口在 [控制中心](/INGRESS-GUIDE/guides/controlcenter/)，进去能看到按距离或名称排序的任务列表，展示你附近可接的任务。
+
+虽然叫任务，但做完没有任何 AP 或道具奖励，收益只有 SpecOps 成就牌计数（也是相对最容易刷出的黑牌）以及陈列在个人页面的 Mission 图标，每完成一个任务就得一个图标。
+<Aside type="caution">
+注意，Mission图标的显示是做完一个堆叠一个在最前方，且目前个人页面中的Mission位置无法手动调整，做拼图任务的时候一定要注意顺序。
+</Aside>
+
+你可以在个人页面 Medal 下方找到 Mission 陈列区：
+<div style="display: flex; justify-content: center; width: 100%;">
+<Image src={missionImg} width={300} alt="" loading="eager"/>
+</div>
+
+起初，官方对 Mission 的定位是单个图标的独立任务。后来玩家发现，陈列区的图标是每行 6 个，如果把一张图切成带间隔的圆形小图标，按顺序排列就能拼出一张大图。这种拼图（Banner）辨识度和成就感更高，现在大家基本都在刷这种拼图任务。
+
+### 任务来源
+
+几乎所有任务都是玩家申请的。等级达到 7 级后，可以通过 [Mission Authoring Tool](https://missions.ingress.com/) 提交。猩猩对任务质量有要求（参考 [官方指南](https://support.ingress.com/hc/en-us/articles/41140412990619-Creating-Missions)），审核通过率感人，经常需要反复修改提交。
+
+### 如何做任务
+
+在任务列表点击任务，查看详情并点开始即可。任务要求你去指定的 Portal 执行特定操作，类型包括 Hack、输入 Passphrase（密码）、占领或升级、安装 Mod、Link 或 Field 等。
+
+**避坑指南：**
+
+除 Passphrase 外，其他操作都有卡进度的可能。比如 Hack 处于冷却期（Cooldown）、Portal 是 8 级且 Mod 满了无法升级或插 Mod、Link 射出数量达到上限等。实在卡死可能需要毒掉解决。
+
+最坑的是 Passphrase，这本质是个问答题。在你实际走到那个 Portal 前，完全不知道题目和答案是啥，全凭申请人的良心。所以尽量只做没有 Passphrase 或明确知道答案的任务。遇到卡关的 Passphrase，去社群问或者在游戏里直接 @ 作者。
+
+### 规划路线
+
+出发前最好去 [Bannergress](https://bannergress.com/) 找你想做的拼图，查看完整路线。
+
+一定要确认这几个点：
+- 路线中有没有施工、封闭或进不去的区域。
+- 有没有坑爹的 Passphrase。
+- 有没有让你占领/插 Mod，但该区域全是你自己阵营的 8 级 Po 群。
+
+确认无误后就可以出发了。以下是 Bannergress 上的部分拼图展示：
+
+<div class="not-content" style={{ display: 'flex', justifyContent: 'center', gap: '20px', alignItems: 'center', flexWrap: 'wrap', marginTop: '20px' }}>
+  <div><Image src={mission1Img} alt="Banner 1" style={{ objectFit: 'contain', width: '280px', height: '171px', display: 'block' }} width={670} height={410} /></div>
+  <div><Image src={mission2Img} alt="Banner 2" style={{ objectFit: 'contain', width: '280px', height: '183px', display: 'block' }} width={682} height={448} /></div>
+  <div><Image src={mission3Img} alt="Banner 3" style={{ objectFit: 'contain', width: '280px', height: '186px', display: 'block' }} width={690} height={460} /></div>
+</div>
