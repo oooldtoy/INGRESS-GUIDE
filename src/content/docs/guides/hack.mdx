@@ -12,6 +12,7 @@ Hack是游戏中最基础的操作，它允许你通过触碰并与[Portal](/ING
 
 
 import { Card, CardGrid } from '@astrojs/starlight/components';
+import { Aside } from '@astrojs/starlight/components';
 
 <CardGrid>
   <Card title="便捷Hack（无需key）" icon="left-arrow">
@@ -43,4 +44,8 @@ import { Card, CardGrid } from '@astrojs/starlight/components';
   - 友军Portal产出物资数量更多且更倾向于产出防御性物资（如共振器、盾等），敌军Portal产出物资数量偏少且更倾向于产出进攻性物资（炸，电棍等）。
   - 若未在Hack时指定是否产出Key，则仅在背包中没有Key的情况下可能产出key；若指定需要产出Key，则无论背包中是否有Key，都可能产出Key。
 
-玩家能够进行Hack动作的频率有限制，详见[Hack冷却](/INGRESS-GUIDE/reference/cooldown/)
+玩家能够进行Hack动作的频率有限制，详见[Hack冷却](/INGRESS-GUIDE/reference/cooldown/)。
+
+<Aside type="caution">
+不要Hack<span style={{ color: '#ff4d4f' }}>红色的Portal</span>！它会吸干的你XM槽，并且只会产出1级的道具，十分不划算。
+</Aside>
