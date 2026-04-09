@@ -79,3 +79,99 @@ Resonator 受到的最终伤害会受到 Portal **[防御值](/INGRESS-GUIDE/ref
 - <i>M</i> 为 Portal 的总防御减免百分比
 
 > **注意：** 该公式仅计算对 Resonator 造成的实质性 XM（血量）伤害。对于 Portal 本体的 Mod，仅在暴击时根据 Mod 的黏性概率计算是否破坏，不涉及血量计算。
+
+### 6. 蓄力下DPS对比
+
+考虑激烈攻防情况下的每秒伤害量（Damage Per Second, DPS），对比两种极端情况：
+
+1. 永远完美蓄力
+2. 完全不蓄力
+
+以下计算均针对L8 XMP/US做出。作出以下前提假设：
+
+1. 攻击时道具无法无缝连续释放，在松开 Attack 按钮后有一段时间该按钮会灰掉。这个时间<i>t<sub>i</sub></i>与系统固定延迟及网络延迟有关，根据观察，<i>t<sub>i</sub> > 0.8s</i>。
+2. 对于L8攻击道具，20%完美蓄力的时间<i>t<sub>c</sub></i>约为0.56s，本地计算不受网络延迟影响。
+3. 蓄力对暴击与攻击力均有加成。
+
+因此，蓄力和不蓄力情况下的DPS期望可以由以下公式得出：
+
+<div style={{ 
+  display: 'flex', 
+  flexWrap: 'wrap', 
+  justifyContent: 'center', 
+  alignItems: 'center', 
+  gap: '12px 4px', 
+  fontFamily: '"Cambria Math", "Times New Roman", serif', 
+  fontSize: '1.25rem', 
+  margin: '2rem 0' 
+}}>
+  
+  <span style={{ display: 'inline-flex', alignItems: 'center' }}>
+    <i>D<sub>nc</sub></i> &nbsp;=&nbsp; 
+  </span>
+
+  <span style={{ display: 'inline-flex', alignItems: 'center' }}>
+    <span style={{ display: 'inline-flex', flexDirection: 'column', textAlign: 'center', fontSize: '0.8em', lineHeight: '1.2', margin: '0 4px' }}>
+      <span style={{ borderBottom: '1px solid', padding: '0 2px' }}><i>2700+0.2&times;(2700&times;2)</i></span>
+      <span><i>t<sub>i</sub></i></span>
+    </span>
+  </span>
+</div>
+
+<div style={{ 
+  display: 'flex', 
+  flexWrap: 'wrap', 
+  justifyContent: 'center', 
+  alignItems: 'center', 
+  gap: '12px 4px', 
+  fontFamily: '"Cambria Math", "Times New Roman", serif', 
+  fontSize: '1.25rem', 
+  margin: '2rem 0' 
+}}>
+  
+  <span style={{ display: 'inline-flex', alignItems: 'center' }}>
+    <i>D<sub>c</sub></i> &nbsp;=&nbsp; 
+  </span>
+
+  <span style={{ display: 'inline-flex', alignItems: 'center' }}>
+    <span style={{ display: 'inline-flex', flexDirection: 'column', textAlign: 'center', fontSize: '0.8em', lineHeight: '1.2', margin: '0 4px' }}>
+      <span style={{ borderBottom: '1px solid', padding: '0 2px' }}><i>2700&times;(1+0.2)+0.4&times;(2700&times;2)</i></span>
+      <span><i>t<sub>i</sub></i>+<i>t<sub>c</sub></i></span>
+    </span>
+  </span>
+</div>
+
+在这种情况下，令 <i>D<sub>nc</sub></i> = <i>D<sub>c</sub></i>，解出两者 DPS 持平时的临界间隔：
+
+<div style={{
+  display: 'flex',
+  flexWrap: 'wrap',
+  justifyContent: 'center',
+  alignItems: 'center',
+  gap: '12px 4px',
+  fontFamily: '"Cambria Math", "Times New Roman", serif',
+  fontSize: '1.25rem',
+  margin: '2rem 0'
+}}>
+  <span style={{ display: 'inline-flex', alignItems: 'center' }}>
+    <i>t<sub>i</sub></i> &nbsp;=&nbsp;
+  </span>
+  <span style={{ display: 'inline-flex', alignItems: 'center' }}>
+    <span style={{ display: 'inline-flex', flexDirection: 'column', textAlign: 'center', fontSize: '0.8em', lineHeight: '1.2', margin: '0 4px' }}>
+      <span style={{ borderBottom: '1px solid', padding: '0 2px' }}>7</span>
+      <span>3</span>
+    </span>
+  </span>
+  <span style={{ display: 'inline-flex', alignItems: 'center' }}>
+    &times; <i>t<sub>c</sub></i> &nbsp;&asymp;&nbsp; <b>1.31s</b>
+  </span>
+</div>
+
+代入 <i>t<sub>c</sub></i> ≈ 0.56s 得到临界值约为 **1.31s**，结论如下：
+
+- **<i>t<sub>i</sub></i> &lt; 1.31s**（延迟较低）：不蓄力连点 DPS 更高。在 <i>t<sub>i</sub></i> 接近下限 0.8s 的极低延迟情况下，不蓄力比蓄力高出约 **19%** 的 DPS。
+- **<i>t<sub>i</sub></i> > 1.31s**（延迟较高）：蓄力攻击 DPS 反超，随延迟增大优势逐渐扩大。
+
+也就是说，蓄力是否合算完全取决于实际网络状况。然而，玩家很难做到连续完美蓄力，网络延迟也不会达到如此之高，因此不蓄力的DPS常常更高。
+
+即使如此，蓄力也是 **最经济** 的进攻方式，毕竟单发XMP的期望伤害更高（提高了42.8%）。在竞争不激烈或物资吃紧的情况下，蓄力仍然是一个很优秀的选择。
